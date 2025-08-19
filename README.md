@@ -8,7 +8,7 @@ This is the initial commit for our project. We are actively developing features,
 ## Architecture Diagram
 Below is the high-level architecture diagram of the project. 
 
-![Architecture Diagram](assets\Architecture.png)
+![Architecture Diagram](assets/Architecture.png)
 
 
 
@@ -20,7 +20,7 @@ The table below lists the contributors along with links to their milestone prese
 | Contributor 1    | [PPT Link](path/to/first-ppt1.pdf)  | [Video Link](path/to/first-video1.mp4) | [PPT Link](path/to/second-ppt1.pdf) | [Video Link](path/to/second-video1.mp4) |
 | Contributor 2    | [PPT Link](path/to/first-ppt2.pdf)  | [Video Link](path/to/first-video2.mp4) | Coming soon                         | Coming soon                         |
 | Contributor 3    | Coming soon                         | Coming soon                         | Coming soon                         | Coming soon                         |
-| P HRITHIK RAJ   | [PPT](assets\hrithik\M1\CaseBridge-MS1-PPT.pdf)| [Video MS1](https://youtu.be/OM9up2UylJI)                        | Coming soon                         | Coming soon                         |
+| P HRITHIK RAJ   | [PPT](assets/hrithik/M1/CaseBridge-MS1-PPT.pdf)| [Video MS1](https://youtu.be/OM9up2UylJI)                        | Coming soon                         | Coming soon                         |
 | Contributor 5    | Coming soon                         | Coming soon                         | Coming soon                         | Coming soon                         |
 
 ## Installation
