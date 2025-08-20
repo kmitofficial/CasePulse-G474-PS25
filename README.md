@@ -21,7 +21,7 @@ The table below lists the contributors along with links to their milestone prese
 | Mahesh Nampally    | [PPT](assets\hrithik\M1\CaseBridge-MS1-PPT.pdf)  | [Video MS1](https://youtu.be/Cast3BBNybU)                         | Coming soon                         | Coming soon                         |
 | Contributor 3    | [PPT Link](path/to/first-ppt2.pdf)  | [Video Link](path/to/first-video2.mp4) | Coming soon                         | Coming soon                         |
 | P HRITHIK RAJ   | [PPT](assets/hrithik/M1/CaseBridge-MS1-PPT.pdf)| [Video MS1](https://youtu.be/OM9up2UylJI)                        | Coming soon                         | Coming soon                         |
-| Contributor 5    | Coming soon                         | Coming soon                         | Coming soon                         | Coming soon                         |
+| T Akshaya    | Coming soon                         | Coming soon                         | Coming soon                         | Coming soon                         |
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/yourusername/your-repo.git`
