@@ -46,35 +46,6 @@ export default function Sidebar() {
   return (
     <div className="fixed left-6 top-1/2 transform -translate-y-1/2 w-96 h-3/5 z-10 hidden lg:block">
       <div className="bg-black/70 backdrop-blur-md rounded-2xl border border-gray-800/50 p-8 h-full overflow-y-auto scrollbar-hide">
-        {/* Top 5 Retrieved Documents Section */}
-        <div className="mb-8">
-          <h3 className="text-white font-bold text-xl mb-6 flex items-center">
-            <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Top 5 Retrieved Documents
-          </h3>
-          <div className="space-y-4">
-            {retrievedDocs.map((doc) => (
-              <div
-                key={doc.id}
-                className="p-4 rounded-lg bg-gray-900/50 border border-gray-700/50 hover:bg-gray-800/50 transition-colors cursor-pointer"
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-white text-base font-medium">{doc.title}</h4>
-                  <span className="text-blue-400 text-sm font-bold">{doc.relevance}%</span>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed">{doc.preview}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* File Upload Section */}
         <div>
           <h3 className="text-white font-bold text-xl mb-6 flex items-center">
             <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -132,6 +103,49 @@ export default function Sidebar() {
             </div>
           )}
         </div>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+        
+        {/* Top 5 Retrieved Documents Section */}
+        <div className="mb-8">
+          <h3 className="text-white font-bold text-xl mb-6 flex items-center">
+            <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0v12h8V4H6z"
+                clipRule="evenodd"
+              />
+            </svg>
+
+
+            Top 5 Retrieved Documents
+          </h3>
+          <div className="space-y-4">
+            {retrievedDocs.map((doc) => (
+              <div
+                key={doc.id}
+                className="p-4 rounded-lg bg-gray-900/50 border border-gray-700/50 hover:bg-gray-800/50 transition-colors cursor-pointer"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h4 className="text-white text-base font-medium">{doc.title}</h4>
+                  <span className="text-blue-400 text-sm font-bold">{doc.relevance}%</span>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">{doc.preview}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* File Upload Section */}
+        
       </div>
 
       <style jsx global>{`

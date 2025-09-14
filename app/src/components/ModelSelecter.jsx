@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export default function ModelSelector() {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedModel, setSelectedModel] = useState("LegalBert")
+  const [selectedModel, setSelectedModel] = useState("Select Model")
 
   const models = [
     {
