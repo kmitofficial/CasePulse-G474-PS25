@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Button } from "../ui/moving-border";
 
 export default function ChatBox() {
   const [scrollY, setScrollY] = useState(0)
@@ -67,12 +68,12 @@ export default function ChatBox() {
             id="lastPrompt"
             className="relative z-10 -mt-6 w-[95%] flex justify-between items-center rounded-2xl border border-gray-900 bg-transparent backdrop-blur-sm shadow-md text-white text-sm px-4 py-3 transition-all duration-500 origin-center font-bold"
           >
-            <span id="lastPromptText" className="opacity-80 font-bold">
+            <span id="lastPromptText" className="opacity-20 font-bold">
               {lastPromptText}
             </span>
             <button
               id="copyBtn"
-              className="ml-3 px-2 py-1 rounded-md bg-gray-800 text-white text-xs hover:bg-gray-700"
+              className="ml-3 px-2 py-1 rounded-md bg-gray-800 text-white text-xs hover:bg-gray-700 opacity-50"
               onClick={() => {
                 navigator.clipboard.writeText(lastPromptText).then(() => {
                   const btn = document.getElementById("copyBtn")

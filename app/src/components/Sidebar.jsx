@@ -44,7 +44,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="fixed left-6 top-1/2 transform -translate-y-1/2 w-96 h-3/5 z-10 hidden lg:block">
+    <div className="fixed left-6 top-1/2 transform -translate-y-1/2 w-96 h-1/2 z-10 hidden lg:block">
       <div className="bg-black/70 backdrop-blur-md rounded-2xl border border-gray-800/50 p-8 h-full overflow-y-auto scrollbar-hide">
         <div>
           <h3 className="text-white font-bold text-xl mb-6 flex items-center">
