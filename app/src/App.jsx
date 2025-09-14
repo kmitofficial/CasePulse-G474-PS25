@@ -3,7 +3,7 @@ import ChatBox from "./components/ui/ChatBox.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import ModelSelector from "./components/ModelSelecter.jsx"
 import FloatingDockDemo from "./components/ui/FloatingDockDemo.jsx"
-import { BackgroundBeams } from "./components/ui/background-beams";
+
 
 
 
