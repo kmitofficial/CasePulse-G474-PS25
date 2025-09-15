@@ -1,5 +1,7 @@
 import { BoxesLoader } from "react-awesome-loaders";
-export const BoxesLoaderComponent = () => {
+
+
+const  BoxesLoaderComponent = () => {
   return (
     <>
       <BoxesLoader
@@ -11,3 +13,5 @@ export const BoxesLoaderComponent = () => {
     </>
   );
 };
+
+export default BoxesLoaderComponent;

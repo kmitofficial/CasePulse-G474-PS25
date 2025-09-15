@@ -11,7 +11,7 @@ export default function Chat() {
 
       {/* LaserFlow overlay with height */}
       <div 
-        style={{ height: '1290px', position: 'absolute', top: 0, left: 0, right: 0, overflow: 'hidden' }} 
+        style={{ height: '1300px', position: 'absolute', top: 0, left: 0, overflow: 'hidden' }} 
         className="z-50 pointer-events-none"
       >
         <LaserFlow />
