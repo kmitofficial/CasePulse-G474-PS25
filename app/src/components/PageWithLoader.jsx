@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BoxesLoaderComponent } from "./ui/BoxesLoaderComponent";
+import BoxesLoaderComponent from "./ui/BoxesLoaderComponent"
 
 export const PageWithLoader = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -21,3 +21,5 @@ export const PageWithLoader = ({ children }) => {
 
   return <>{children}</>;
 };
+
+export default PageWithLoader;
