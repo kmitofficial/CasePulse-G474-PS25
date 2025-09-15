@@ -5,6 +5,7 @@ import ModelSelector from "./components/ModelSelecter.jsx"
 import FloatingDockDemo from "./components/ui/FloatingDockDemo.jsx"
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import SignupFormDemo from "./pages/Signup.jsx"
+import Home from './Pages/Home.jsx';
 
 
 
@@ -14,7 +15,8 @@ export default function App() {
     
     
       <BrowserRouter>
-      <main className="min-h-screen bg-black text-white">
+      <div>
+    {/*<main className="min-h-screen bg-black text-white">
         <Routes>
           {/* Signup Page */}
           <Route path="/signup" element={<SignupFormDemo />} />
@@ -43,7 +45,8 @@ export default function App() {
             }
           />
         </Routes>
-      </main>
+      </main>*/}
+    <Home></Home></div>
     </BrowserRouter>
   )
 }
