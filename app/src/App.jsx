@@ -3,8 +3,8 @@ import { useState } from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import SignupFormDemo from "./pages/Signup"
 
-import Home from './pages/Home.jsx';
-import Chat from "./pages/Chat.jsx"
+import Home from './pages/Home';
+import Chat from "./pages/Chat"
 
 
 
