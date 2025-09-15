@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import {BrowserRouter,Routes,Route} from "react-router-dom"
-import SignupFormDemo from "./Pages/Signup"
-import { PageWithLoader } from "./components/PageWithLoader.jsx";
-import Home from './Pages/Home.jsx';
-import Chat from "./Pages/Chat.jsx"
+import SignupFormDemo from "./pages/Signup"
+
+import Home from './pages/Home.jsx';
+import Chat from "./pages/Chat.jsx"
 
 
 
