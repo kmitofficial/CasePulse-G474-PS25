@@ -23,7 +23,7 @@ export default function FloatingDockDemo() {
       icon: (
         <IconLogin2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/Login",
+      href: "/Signup",
     },
     {
       title: "About Us",

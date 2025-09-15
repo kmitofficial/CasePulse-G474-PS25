@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
 import Orb from "@/components/Orb";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import BlurText from "@/components/BlurText";
 import GradientText from "@/components/GradientText";
 import TextType from "@/components/TextType";
+import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx"
+import "../../globals.css"
+import { useNavigate } from "react-router-dom";
 
 
 const headlines = [
@@ -21,6 +22,7 @@ const about = "Case Bridge is an intelligent legal research and analysis tool de
 
 export default function Home() {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,16 +33,32 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-foreground">
-      <Navbar />
+      {/* Floating Dock - Higher z-index to ensure it's above everything */}
+      <div className="fixed top-4 left-4 z-50">
+        <FloatingDockDemo />
+      </div>
+      
+
       {/* Hero Section */}
       <section
         className="relative flex flex-col items-center justify-center overflow-hidden text-center px-4"
         style={{ minHeight: "100vh" }}
       >
-        <div className="absolute inset-0 z-5" >
-          <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
+        {/* Orb Background - Lower z-index and pointer-events-none to prevent interference */}
+        <div 
+          className="absolute inset-0 z-0" 
+          style={{ pointerEvents: 'none' }} // Prevent Orb from blocking interactions
+        >
+          <Orb 
+            hoverIntensity={0.3} // Reduced intensity to improve performance
+            rotateOnHover={true} 
+            hue={0} 
+            forceHoverState={false} 
+          />
         </div>
-        <div className="relative z-5 flex flex-col items-center justify-center w-full h-full px-4">
+
+        {/* Main Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
           <BlurText
             key={index}
             text={headlines[index]}
@@ -53,10 +71,11 @@ export default function Home() {
             CaseBridge uses Dense Retrieval + BM25 Hybrid Search for state-of-the-art case law retrieval
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="flex justify-content-between px-8 py-3 rounded-full hover:bg-black hover:text-white font-semibold text-lg bg-white cursor-pointer">
+            <button onClick={() => navigate("/Chat")} 
+            className="flex justify-content-between px-8 py-3 rounded-full hover:bg-black hover:text-white font-semibold text-lg bg-white cursor-pointer transition-all duration-200 hover:scale-105">
               Get Started <ArrowRight size={"25"} className="mt-0.5 ml-2" />
             </button>
-            <button className="px-8 py-3 rounded-full font-semibold text-lg bg-gray-900 text-gray-500 shadow-xl cursor-pointer">
+            <button className="px-8 py-3 rounded-full font-semibold text-lg bg-gray-900 text-gray-500 shadow-xl cursor-pointer transition-all duration-200 hover:scale-105">
               Learn More
             </button>
           </div>
@@ -72,23 +91,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-4 lg:px-6 ">
+      {/* About Section */}
+      <section className="py-16 px-4 sm:px-4 lg:px-6 relative z-10">
         <div className="flex flex-col items-center justify-center gap-8">
-          <div class="items-center justify-center gap-6">
+          <div className="items-center justify-center gap-6">
             <GradientText
               colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
               animationSpeed={3}
               showBorder={false}
               className="custom-class sm:text-5xl font-semibold mb-6"
             >About</GradientText>
-            <div class="w-100 h-0.5 bg-white"></div>
+            <div className="w-100 h-0.5 bg-white"></div>
           </div>
-          <TextType text={about} typingSpeed={50} pauseDuration={1000} cursorCharacter="_" cursorClassName="text-white" className="text-center leading-relaxed max-w-3xl text-xl" />
+          <TextType 
+            text={about} 
+            typingSpeed={50} 
+            pauseDuration={1000} 
+            cursorCharacter="_" 
+            cursorClassName="text-white" 
+            className="text-center leading-relaxed max-w-3xl text-xl" 
+          />
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-4 lg:px-6 ">
+      <section className="py-16 px-4 sm:px-4 lg:px-6 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           <GradientText
             colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
@@ -116,7 +143,7 @@ export default function Home() {
                 desc: "Generate structured, professional-grade insights for legal decision-making.",
               },
             ].map(({ title, desc }, i) => (
-              <Card key={i} className="rounded-sm border-0 custom-gray">
+              <Card key={i} className="rounded-sm border-0 custom-gray hover:scale-105 transition-transform duration-200">
                 <CardContent className="p-6">
                   <h3 className="text-2xl text-white font-semibold mb-2">{title}</h3>
                   <p className="text-muted-foreground">{desc}</p>
@@ -128,7 +155,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-black text-center text-muted-foreground">
+      <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-black text-center text-muted-foreground relative z-10">
         <p>&copy; {new Date().getFullYear()} Case Bridge. All rights reserved.</p>
       </footer>
     </div>
