@@ -16,11 +16,11 @@ export default function App() {
     
       <Routes>
         {/* Signup Page */}
-        <Route path="/signup" element={<PageWithLoader><SignupFormDemo/></PageWithLoader>} />
+        <Route path="/signup" element={<SignupFormDemo/>} />
         {/* Chat Page */}
-        <Route path="/Chat" element={<PageWithLoader><Chat/></PageWithLoader>} />
+        <Route path="/Chat" element={<Chat/>} />
         {/* Home Page  */}
-        <Route path="/home" element={<PageWithLoader><Home /></PageWithLoader>} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
