@@ -2,11 +2,11 @@ import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
   IconBrandGithub,
-  IconBrandX,
-  IconExchange,
+  IconSettings,
+  IconLogin2,
   IconHome,
   IconNewSection,
-  IconTerminal2,
+  IconInfoCircle,
 } from "@tabler/icons-react";
 
 export default function FloatingDockDemo() {
@@ -16,43 +16,37 @@ export default function FloatingDockDemo() {
       icon: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/Home",
     },
     {
-      title: "Products",
+      title: "Login",
       icon: (
-        <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconLogin2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/Login",
     },
     {
-      title: "Components",
+      title: "About Us",
       icon: (
-        <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconInfoCircle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/About-Us",
     },
     
     {
-      title: "Changelog",
+      title: "Settings",
       icon: (
-        <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconSettings className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/Settings",
     },
-    {
-      title: "Twitter",
-      icon: (
-        <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
+    
     {
       title: "GitHub",
       icon: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/GitHub",
     },
   ];
   
