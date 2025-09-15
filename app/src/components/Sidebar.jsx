@@ -126,6 +126,7 @@ export default function AssistantBall() {
             bottom: `${position.y + 50}px`, // Position above the ball
           }}
         >
+      
           <div className="bg-black/90 backdrop-blur-md rounded-2xl border border-gray-800/50 p-6 w-80 h-96 overflow-y-auto scrollbar-hide shadow-2xl">
             <div>
               <h3 className="text-white font-bold text-lg mb-4 flex items-center">
@@ -184,6 +185,7 @@ export default function AssistantBall() {
                 </div>
               )}
             </div>
+            
 
             {/* Top 3 Retrieved Documents Section */}
             <div className="mt-6">
@@ -197,6 +199,7 @@ export default function AssistantBall() {
                 </svg>
                 Top Documents
               </h3>
+              
               <div className="space-y-3">
                 {retrievedDocs.map((doc) => (
                   <div
@@ -212,7 +215,9 @@ export default function AssistantBall() {
                 ))}
               </div>
             </div>
+            
           </div>
+          
 
           <style jsx global>{`
             .scrollbar-hide {

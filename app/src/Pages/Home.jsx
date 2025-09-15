@@ -10,6 +10,7 @@ import "../../globals.css"
 import { useNavigate } from "react-router-dom";
 
 
+
 const headlines = [
   "Smarter Legal Research, Instantly",
   "AI-Powered Clarity for Every Case",

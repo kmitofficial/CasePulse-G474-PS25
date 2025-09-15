@@ -1,40 +1,53 @@
-import React from 'react';
+import React from 'react'; 
 import ChatBox from "../components/ui/ChatBox.jsx";
 import AssistantBall from "../components/Sidebar.jsx";
 import ModelSelector from "../components/ModelSelecter.jsx";
 import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx";
-import LaserFlow from "../components/LaserFlow.jsx";
+// import LaserFlow from "../components/LaserFlow.jsx";
+import RotatingText from "../components/ui/RotatingText.jsx";
+import ElasticSlider from "../components/ui/ElasticSlider.jsx"
 
 export default function Chat() {
   return (
     <main className="min-h-screen bg-black text-white relative overflow-hidden">
 
-      {/* LaserFlow overlay with height */}
-      <div 
-        style={{ height: '1300px', position: 'absolute', top: 0, left: 0, overflow: 'hidden' }} 
-        className="z-50 pointer-events-none"
-      >
-        <LaserFlow />
-      </div>
+      {/* Text Section */}
+      <div className="container mx-auto px-4 py-8 relative z-10 text-center">
+        
+        {/* Main Title */}
+        <h1 className="text-6xl font-extrabold text-indigo-500 mb-4 tracking-wide">
+          CaseBridge
+        </h1>
 
-      {/* Text */}
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            CASE BRIDGE
-          </h1>
-        </div>
+        {/* Subtitle */}
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-300 flex justify-center items-center gap-2">
+          Legal
+          <RotatingText
+            texts={['Indian', 'US']}
+            mainClassName="px-3 bg-indigo-600 text-white text-2xl sm:text-3xl font-bold rounded-lg inline-flex items-center"
+            staggerFrom={"last"}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden"
+            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
+          Jurisdiction
+        </h2>
       </div>
 
       {/* Assistant floating ball */}
       <AssistantBall />
+     
 
-      {/* Chat input area with higher z-index and brightness */}
+      {/* Chat input */}
       <ChatBox 
         style={{ 
           position: 'relative', 
-          zIndex: 70,   // higher than LaserFlow z-50
-          filter: 'brightness(1.5) contrast(1.2)'  // makes it visually brighter
+          zIndex: 70, 
+          filter: 'brightness(1.5) contrast(1.2)' 
         }} 
       />
 

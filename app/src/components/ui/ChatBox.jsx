@@ -54,13 +54,14 @@ export default function ChatBox() {
           }}
         >
           <input
-            type="text"
-            placeholder="Type your legal question here..."
-            className="flex-1 bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
-          />
-          <button className="m-2 rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors duration-200">
-            Ask!
-          </button>
+  type="text"
+  placeholder="Type your legal question here..."
+  className="flex-1 bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:outline-none text-lg font-bold tracking-wide"
+/>
+
+<button className="m-2 rounded-xl bg-indigo-600 px-6 py-3 text-white font-extrabold text-lg hover:bg-indigo-700 transition-colors duration-200">
+  Ask!
+</button>
         </div>
 
         {!showHistory && (
@@ -97,7 +98,7 @@ export default function ChatBox() {
           }}
         >
           <div className="bg-black/90 backdrop-blur-md rounded-t-2xl border-t border-l border-r border-gray-800 p-6 max-h-80 overflow-y-auto scrollbar-hide">
-            <h3 className="text-white font-bold text-lg mb-4 flex items-center">
+            <h3 className="text-white font-extrabold text-xl mb-4 flex items-center tracking-wide">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
