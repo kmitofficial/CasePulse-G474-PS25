@@ -5,30 +5,42 @@ import ModelSelector from "../components/ModelSelecter.jsx";
 import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx";
 // import LaserFlow from "../components/LaserFlow.jsx";
 import RotatingText from "../components/ui/RotatingText.jsx";
-import ElasticSlider from "../components/ui/ElasticSlider.jsx"
+//import ElasticSlider from "../components/ui/ElasticSlider.jsx"
+import DarkVeil from "../components/DarkVeil.jsx"
 
 export default function Chat() {
   return (
     <main className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* DarkVeil full-page background */}
+      <div className="absolute inset-0 z-0">
+        <DarkVeil
+        hueShift={40}
+        noiseIntensity={0.05}
+        scanlineIntensity={0.2}
+        scanlineFrequency={5}
+        warpAmount={0.1}
+        speed={0.5}
+        resolutionScale={1}
+      />
+      </div>
 
       {/* Text Section */}
       <div className="container mx-auto px-4 py-8 relative z-10 text-center">
-        
         {/* Main Title */}
-        <h1 className="text-6xl font-extrabold text-indigo-500 mb-4 tracking-wide">
-          CaseBridge
+        <h1 className="text-2xl font-extrabold text-indigo-500 mb-4 tracking-wide">
+          
         </h1>
 
         {/* Subtitle */}
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-300 flex justify-center items-center gap-2">
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-300 flex justify-center items-center gap-2">
           Legal
           <RotatingText
             texts={['Indian', 'US']}
-            mainClassName="px-3 bg-indigo-600 text-white text-2xl sm:text-3xl font-bold rounded-lg inline-flex items-center"
+            mainClassName="px-3 bg-indigo-600 text-white text-xl sm:text-2xl font-bold rounded-lg inline-flex items-center"
             staggerFrom={"last"}
-            initial={{ y: "100%" }}
+            initial={{ y: "100%"}}
             animate={{ y: 0 }}
-            exit={{ y: "-120%" }}
+            exit={{ y: "-120%"}}
             staggerDuration={0.025}
             splitLevelClassName="overflow-hidden"
             transition={{ type: 'spring', damping: 30, stiffness: 400 }}
@@ -40,7 +52,8 @@ export default function Chat() {
 
       {/* Assistant floating ball */}
       <AssistantBall />
-     
+
+      
 
       {/* Chat input */}
       <ChatBox 
@@ -51,11 +64,8 @@ export default function Chat() {
         }} 
       />
 
-      {/* Model selector */}
-      <ModelSelector />
-
       {/* Floating dock */}
       <FloatingDockDemo />
     </main>
-  );
+  )
 }

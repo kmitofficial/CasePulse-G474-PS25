@@ -11,15 +11,13 @@ export default function SignupFormDemo() {
     navigate("/home")
     e.preventDefault()
     console.log("Form submitted")
-
-
   }
 
   return (
-    <div className="min-h-screen w-full flex justify-end items-center px-8 bg-black text-white">
-      <div className="shadow-input w-full max-w-sm rounded-2xl p-6 border border-gray-700 bg-black">
-        <h2 className="text-xl font-semibold mb-2 font-sans">Welcome to Case Bridge</h2>
-        <p className="mb-6 text-sm text-white/80">
+    <div className="min-h-screen w-full flex justify-end items-center px-8">
+      <div className="shadow-input w-full max-w-sm rounded-2xl p-6 border border-gray-700 bg-transparent">
+        <h2 className="text-xl text-white font-semibold mb-2 font-sans">Welcome to Case Bridge</h2>
+        <p className="mb-6 text-sm text-gray-200">
           Join Case Bridge to access advanced legal research tools
         </p>
 
@@ -46,20 +44,19 @@ export default function SignupFormDemo() {
           </LabelInputContainer>
 
           <button
-  type="submit"
-  className="group/btn relative w-full rounded-md bg-gradient-to-r from-[#9C43FE] via-[#4CCCEB] to-[#10149A] font-medium text-white shadow-lg hover:from-[#A05BFF] hover:via-[#5CD5F0] hover:to-[#2B2FAF] transition-all duration-200 h-10"
->
-  Sign Up →
-  <BottomGradient />
-</button>
-
+            type="submit"
+            className="group/btn relative w-full rounded-md bg-gradient-to-r from-[#9C43FE] via-[#4CCCEB] to-[#10149A] font-medium text-white shadow-lg hover:from-[#A05BFF] hover:via-[#5CD5F0] hover:to-[#2B2FAF] transition-all duration-200 h-10"
+          >
+            Sign Up →
+            <BottomGradient />
+          </button>
 
           <div className="my-4 h-[1px] w-full bg-white/20" />
 
           <div className="flex flex-col space-y-3">
             <button
               type="button"
-              className="group/btn flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-black border border-gray-700 px-4 font-medium text-white shadow transition-colors hover:bg-gray-900"
+              className="group/btn flex h-10 w-full items-center justify-start space-x-2 rounded-md border border-gray-700 px-4 font-medium text-white shadow transition-colors hover:bg-gray-800 bg-transparent"
             >
               <IconBrandGithub className="h-4 w-4 text-white/80" />
               <span>GitHub</span>
@@ -67,7 +64,7 @@ export default function SignupFormDemo() {
             </button>
             <button
               type="button"
-              className="group/btn flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-black border border-gray-700 px-4 font-medium text-white shadow transition-colors hover:bg-gray-900"
+              className="group/btn flex h-10 w-full items-center justify-start space-x-2 rounded-md border border-gray-700 px-4 font-medium text-white shadow transition-colors hover:bg-gray-800 bg-transparent"
             >
               <IconBrandGoogle className="h-4 w-4 text-white/80" />
               <span>Google</span>
