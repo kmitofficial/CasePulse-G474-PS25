@@ -20,11 +20,11 @@ export default function App() {
     
       <Routes>
         {/* Signup Page */}
-        <Route path="/signup" element={<CircleLoaderComponent><SignupFormDemo/></CircleLoaderComponent>} />
+        <Route path="/signup" element={<SignupFormDemo/>} />
         {/* Chat Page */}
-        <Route path="/Chat" element={ <CircleLoaderComponent><Chat/></CircleLoaderComponent> } />
+        <Route path="/Chat" element={<Chat/> } />
         {/* Home Page  */}
-        <Route path="/home" element={<CircleLoaderComponent><Home /></CircleLoaderComponent>} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

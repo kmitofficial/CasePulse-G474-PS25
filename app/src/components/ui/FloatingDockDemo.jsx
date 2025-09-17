@@ -7,9 +7,11 @@ import {
   IconHome,
   IconNewSection,
   IconInfoCircle,
+  IconHistory
 } from "@tabler/icons-react";
 
-export default function FloatingDockDemo() {
+export default function FloatingDockDemo({ onHistoryClick }) {
+
   const links = [
     {
       title: "Home",
@@ -17,6 +19,11 @@ export default function FloatingDockDemo() {
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "/Home",
+    },
+      {
+      title: "Chat History",
+      icon: <IconHistory className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
+      onClick: onHistoryClick,
     },
     {
       title: "Login",
