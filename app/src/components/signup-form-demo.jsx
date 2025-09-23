@@ -4,14 +4,39 @@ import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom";
+import {auth,googleProvider} from "../../config/firebase"
+import {createUserWithEmailAndPassword,signInWithPopup} from "firebase/auth"
+import { useState } from "react"
+
 
 export default function SignupFormDemo() {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    navigate("/home")
+  const handleSubmit = async (e) => {
+    // navigate("/home")
     e.preventDefault()
+    try{
+      await createUserWithEmailAndPassword(auth,email,password);
+
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+
     console.log("Form submitted")
   }
+  const SignInWithGoogle=async () =>{
+    try{
+      await signInWithPopup(auth,googleProvider);
+
+    }
+    catch(err){
+      console.log(err);
+    }
+
+  }
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
 
   return (
     <div className="min-h-screen w-full flex justify-end items-center px-8">
@@ -35,12 +60,12 @@ export default function SignupFormDemo() {
 
           <LabelInputContainer>
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+            <Input id="email" placeholder="projectmayhem@fc.com" type="email" onChange={(e)=>setEmail(e.target.value)}/>
           </LabelInputContainer>
 
           <LabelInputContainer>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="••••••••" type="password" />
+            <Input id="password" placeholder="••••••••" type="password" onChange={(e)=>setPassword(e.target.value)}/>
           </LabelInputContainer>
 
           <button
@@ -63,6 +88,7 @@ export default function SignupFormDemo() {
               <BottomGradient />
             </button>
             <button
+              onClick={SignInWithGoogle}
               type="button"
               className="group/btn flex h-10 w-full items-center justify-start space-x-2 rounded-md border border-gray-700 px-4 font-medium text-white shadow transition-colors hover:bg-gray-800 bg-transparent"
             >

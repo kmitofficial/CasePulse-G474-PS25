@@ -23,28 +23,28 @@ const cardData = [
   },
   {
     color: '#060010',
-    title: 'Collaboration',
+    title: 'Top k Docs',
     description: 'Share case notes & annotations with your team',
-    label: 'Collaboration Hub'
+    label: 'Document Drafting'
   },
   {
     color: '#060010',
     title: 'Automation',
     description: 'Generate contracts, notices & petitions automatically',
-    label: 'Document Drafting'
+    label: 'Automation'
   },
-  // {
-  //   color: '#060010',
-  //   title: 'Integration',
-  //   description: 'Find precedents & compare case laws',
-  //   label: 'Legal Research'
-  // },
-  // {
-  //   color: '#060010',
-  //   title: 'Security',
-  //   description: 'Secure client data & ensure compliance',
-  //   label: 'Confidentiality'
-  // }
+  {
+    color: '#060010',
+    title: 'Integration',
+    description: 'Find precedents & compare case laws',
+    label: 'Legal Research'
+  },
+  {
+    color: '#060010',
+    title: 'Security',
+    description: 'Secure client data & ensure compliance',
+    label: 'Confidentiality'
+  }
 ];
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
@@ -168,6 +168,30 @@ const ParticleCard = ({
       timeoutsRef.current.push(timeoutId);
     });
   }, [initializeParticles]);
+  // at the top of MagicBento
+const syntheticDocs = [
+  { title: "Case_Analysis_1" },
+  { title: "Contract_Template_2.docx" },
+  { title: "Notice_Draft_3.docx" },
+  { title: "Petition_Summary_4.pdf" },
+  { title: "Judgment_Highlights_5.pdf" }
+];
+
+const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
+
+useEffect(() => {
+  const fetchDocs = async () => {
+    try {
+      const res = await fetch("/api/fused_files"); // adjust endpoint
+      const data = await res.json();
+      setDocs(data.slice(0, 5)); // keep only 5
+    } catch (err) {
+      console.error("Error fetching docs:", err);
+    }
+  };
+  fetchDocs();
+}, []);
+
 
   useEffect(() => {
     if (disableAnimations || !cardRef.current) return;
@@ -492,6 +516,32 @@ const MagicBento = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
   const [isUS, setIsUS] = useState(false); // false = Indian, true = US
+    // at the top of MagicBento
+  // at the top of MagicBento
+const syntheticDocs = [
+  { title: "Case_Analysis_1.pdf" },
+  { title: "Contract_Template_2.docx" },
+  { title: "Notice_Draft_3.docx" },
+  { title: "Petition_Summary_4.pdf" },
+  { title: "Judgment_Highlights_5.pdf" }
+];
+
+const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
+
+
+  useEffect(() => {
+    const fetchDocs = async () => {
+      try {
+        const res = await fetch("/api/fused_files"); // adjust endpoint
+        const data = await res.json();
+        setDocs(data.slice(0, 5)); // keep only 5
+      } catch (err) {
+        console.error("Error fetching docs:", err);
+      }
+    };
+    fetchDocs();
+  }, []);
+
 
 
   return (
@@ -531,6 +581,7 @@ const MagicBento = ({
             }
             
             .card-responsive .card:nth-child(3) {
+              
               grid-column: span 2;
               grid-row: span 2;
             }
@@ -653,62 +704,76 @@ const MagicBento = ({
             if (enableStars) {
               return (
                 <ParticleCard
-                  key={index}
-                  className={baseClassName}
-                  style={cardStyle}
-                  disableAnimations={shouldDisableAnimations}
-                  particleCount={particleCount}
-                  glowColor={glowColor}
-                  enableTilt={enableTilt}
-                  clickEffect={clickEffect}
-                  enableMagnetism={enableMagnetism}
-                >
-                  <div className="card__header flex justify-between gap-3 relative text-white">
-                    <span className="card__label text-base">{card.label}</span>
-                  </div>
-                  <div className="card__content flex flex-col relative text-white">
-                      {/* Replace title with a component conditionally */}
-                      {card.type === 'toggle' ? (
-                        <div className="flex items-center gap-2 mt-2 text-sm">
-                          {/* Indian label */}
-                          <span
-                            className={`text-xs font-medium transition-opacity ${
-                              !isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
-                            }`}
-                          >
-                            Indian
-                          </span>
+  key={index}
+  className={baseClassName}
+  style={cardStyle}
+  disableAnimations={shouldDisableAnimations}
+  particleCount={particleCount}
+  glowColor={glowColor}
+  enableTilt={enableTilt}
+  clickEffect={clickEffect}
+  enableMagnetism={enableMagnetism}
+>
+  <div className="card__header flex justify-between gap-3 relative text-white">
+    <span className="card__label text-base">{card.label}</span>
+  </div>
 
-                          {/* Switch */}
-                          <Switch
-                            checked={isUS}
-                            onCheckedChange={(checked) => setIsUS(checked)}
-                            className="w-10 h-5 bg-[#060010] border border-gray-700"
-                          />
+  <div className="card__content flex flex-col relative text-white">
+    {/* Toggle card */}
+    {card.type === 'toggle' ? (
+      <div className="flex items-center gap-2 mt-2 text-sm">
+        <span
+          className={`text-xs font-medium transition-opacity ${
+            !isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+          }`}
+        >
+          Indian
+        </span>
 
-                          {/* US label */}
-                          <span
-                            className={`text-xs font-medium transition-opacity ${
-                              isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
-                            }`}
-                          >
-                            US
-                          </span>
-                        </div>
+        <Switch
+          checked={isUS}
+          onCheckedChange={(checked) => setIsUS(checked)}
+          className="w-10 h-5 bg-[#060010] border border-gray-700"
+        />
 
-                      ) : (
-                        <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-                          {card.title}
-                        </h3>
-                      )}
-                    <p
-                      className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}
-                    >
-                      {card.description}
-                    </p>
-                    
-                  </div>
-                </ParticleCard>
+        <span
+          className={`text-xs font-medium transition-opacity ${
+            isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+          }`}
+        >
+          US
+        </span>
+      </div>
+    ) : card.label === "Document Drafting" ? (
+      // Top 5 docs for Document Drafting
+      <div className="space-y-2 mt-2">
+        <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
+        <ul className="text-xs space-y-1">
+          {docs.length > 0 ? (
+            docs.map((doc, i) => (
+              <li key={i} className="truncate text-gray-300">
+                • {doc.title || `Doc ${i + 1}`}
+              </li>
+            ))
+          ) : (
+            <li className="text-gray-500 italic">Loading...</li>
+          )}
+        </ul>
+      </div>
+    ) : (
+      // Default card title & description
+      <>
+        <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+          {card.title}
+        </h3>
+        <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+          {card.description}
+        </p>
+      </>
+    )}
+  </div>
+</ParticleCard>
+
               );
             }
 
@@ -831,12 +896,32 @@ const MagicBento = ({
                   <span className="card__label text-base">{card.label}</span>
                 </div>
                 <div className="card__content flex flex-col relative text-white">
-                  <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-                    {card.title}
-                  </h3>
-                  <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
-                    {card.description}
-                  </p>
+                  {card.label === "Document Drafting" ? (
+                  <div className="space-y-2 mt-2">
+                    <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
+                    <ul className="text-xs space-y-1">
+                      {docs.length > 0 ? (
+                        docs.map((doc, i) => (
+                          <li key={i} className="truncate text-gray-300">
+                            • {doc.title || doc.name || `Doc ${i + 1}`}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-gray-500 italic">Loading...</li>
+                      )}
+                    </ul>
+                  </div>
+                ) : (
+                  <>
+                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                      {card.title}
+                    </h3>
+                    <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+                      {card.description}
+                    </p>
+                  </>
+                )}
+
                 </div>
               </div>
             );
