@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 const headlines = [
   "Smarter Legal Research, Instantly",
   "AI-Powered Clarity for Every Case",
@@ -33,7 +34,9 @@ export default function Home() {
   }, []);
 
   return (
+    
     <div className="min-h-screen bg-black text-foreground">
+     
       {/* Floating Dock - Higher z-index to ensure it's above everything */}
       <div className="fixed top-4 left-4 z-50">
         <FloatingDockDemo />

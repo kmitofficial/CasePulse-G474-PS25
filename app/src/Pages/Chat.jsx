@@ -37,12 +37,12 @@ export default function Chat() {
       
 
       {/* Text Section */}
-      <div className="container mx-auto px-4 py-8 relative z-10 text-center">
+      {/*<div className="container mx-auto px-4 py-8 relative z-10 text-center">
         {/* Main Title */}
-        <h1 className="text-2xl font-extrabold text-indigo-500 mb-4 tracking-wide"></h1>
+        {/*<h1 className="text-2xl font-extrabold text-indigo-500 mb-4 tracking-wide"></h1>
 
         {/* Subtitle */}
-        <h2 className="text-xl sm:text-2xl font-semibold text-gray-300 flex justify-center items-center gap-2">
+        {/*<h2 className="text-xl sm:text-2xl font-semibold text-gray-300 flex justify-center items-center gap-2">
           Legal
           <RotatingText
             texts={["Indian", "US"]}

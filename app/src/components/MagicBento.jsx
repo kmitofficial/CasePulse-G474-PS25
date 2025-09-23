@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { Switch } from "@/components/ui/switch";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -10,39 +11,40 @@ const cardData = [
   {
     color: '#060010',
     title: 'Analytics',
-    description: 'Track user behavior',
-    label: 'Insights'
+    description: 'Summarize judgments & highlight key points',
+    label: 'Case Insights'
   },
   {
     color: '#060010',
     title: 'Dashboard',
-    description: 'Centralized data view',
-    label: 'Overview'
+    description: 'Switch between Indian & US law datasets',
+    label: 'Jurisdiction Toggle',
+    type:'toggle'
   },
   {
     color: '#060010',
     title: 'Collaboration',
-    description: 'Work together seamlessly',
-    label: 'Teamwork'
+    description: 'Share case notes & annotations with your team',
+    label: 'Collaboration Hub'
   },
   {
     color: '#060010',
     title: 'Automation',
-    description: 'Streamline workflows',
-    label: 'Efficiency'
+    description: 'Generate contracts, notices & petitions automatically',
+    label: 'Document Drafting'
   },
-  {
-    color: '#060010',
-    title: 'Integration',
-    description: 'Connect favorite tools',
-    label: 'Connectivity'
-  },
-  {
-    color: '#060010',
-    title: 'Security',
-    description: 'Enterprise-grade protection',
-    label: 'Protection'
-  }
+  // {
+  //   color: '#060010',
+  //   title: 'Integration',
+  //   description: 'Find precedents & compare case laws',
+  //   label: 'Legal Research'
+  // },
+  // {
+  //   color: '#060010',
+  //   title: 'Security',
+  //   description: 'Secure client data & ensure compliance',
+  //   label: 'Confidentiality'
+  // }
 ];
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
@@ -489,6 +491,8 @@ const MagicBento = ({
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
+  const [isUS, setIsUS] = useState(false); // false = Indian, true = US
+
 
   return (
     <>
@@ -663,14 +667,46 @@ const MagicBento = ({
                     <span className="card__label text-base">{card.label}</span>
                   </div>
                   <div className="card__content flex flex-col relative text-white">
-                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-                      {card.title}
-                    </h3>
+                      {/* Replace title with a component conditionally */}
+                      {card.type === 'toggle' ? (
+                        <div className="flex items-center gap-2 mt-2 text-sm">
+                          {/* Indian label */}
+                          <span
+                            className={`text-xs font-medium transition-opacity ${
+                              !isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                            }`}
+                          >
+                            Indian
+                          </span>
+
+                          {/* Switch */}
+                          <Switch
+                            checked={isUS}
+                            onCheckedChange={(checked) => setIsUS(checked)}
+                            className="w-10 h-5 bg-[#060010] border border-gray-700"
+                          />
+
+                          {/* US label */}
+                          <span
+                            className={`text-xs font-medium transition-opacity ${
+                              isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                            }`}
+                          >
+                            US
+                          </span>
+                        </div>
+
+                      ) : (
+                        <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                          {card.title}
+                        </h3>
+                      )}
                     <p
                       className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}
                     >
                       {card.description}
                     </p>
+                    
                   </div>
                 </ParticleCard>
               );
