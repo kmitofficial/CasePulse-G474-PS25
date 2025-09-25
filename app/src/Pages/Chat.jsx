@@ -5,11 +5,13 @@ import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx"
 import RotatingText from "../components/ui/RotatingText.jsx"
 //import ElasticSlider from "../components/ui/ElasticSlider.jsx"
 import DarkVeil from "../components/DarkVeil.jsx"
+import Navbar from "../components/Navbar-g.jsx"
 
 
 export default function Chat() {
   return (
     <main className="min-h-screen bg-black text-white relative overflow-hidden">
+      <Navbar/>
       {/* DarkVeil full-page background */}
       <div className="fixed inset-0 z-0">
         <DarkVeil
@@ -73,11 +75,11 @@ export default function Chat() {
       />
 
       {/* Floating dock */}
-      <div className="fixed bottom-4 right-4 group">
+      {/* <div className="fixed bottom-4 right-4 group">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <FloatingDockDemo />
         </div>
-      </div>
+      </div> */}
     </main>
   )
 }

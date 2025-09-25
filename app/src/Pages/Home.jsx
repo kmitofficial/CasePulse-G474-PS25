@@ -8,6 +8,7 @@ import TextType from "@/components/TextType";
 import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx"
 import "../../globals.css"
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar"
 
 
 
@@ -35,12 +36,14 @@ export default function Home() {
 
   return (
     
+    
     <div className="min-h-screen bg-black text-foreground">
+      <Navbar/>
      
       {/* Floating Dock - Higher z-index to ensure it's above everything */}
-      <div className="fixed top-4 left-4 z-50">
+      {/* <div className="fixed top-4 left-4 z-50">
         <FloatingDockDemo />
-      </div>
+      </div> */}
       
 
       {/* Hero Section */}
@@ -54,7 +57,7 @@ export default function Home() {
           style={{ pointerEvents: 'none' }} // Prevent Orb from blocking interactions
         >
           <Orb 
-            hoverIntensity={0.3} // Reduced intensity to improve performance
+            hoverIntensity={0.5} // Reduced intensity to improve performance
             rotateOnHover={true} 
             hue={0} 
             forceHoverState={false} 
@@ -157,6 +160,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+     
 
       {/* Footer */}
       <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-black text-center text-muted-foreground relative z-10">

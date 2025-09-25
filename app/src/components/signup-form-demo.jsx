@@ -4,39 +4,39 @@ import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom";
-import {auth,googleProvider} from "../../config/firebase"
-import {createUserWithEmailAndPassword,signInWithPopup} from "firebase/auth"
+import { auth, googleProvider } from "../../config/firebase"
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { useState } from "react"
-
 
 export default function SignupFormDemo() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Email + password signup
   const handleSubmit = async (e) => {
-    // navigate("/home")
-    e.preventDefault()
-    try{
-      await createUserWithEmailAndPassword(auth,email,password);
+    e.preventDefault();
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("Signed up as:", userCredential.user.email);
+        navigate("/home"); // Redirect after successful signup
+      } catch (err) {
+        console.error("Signup error:", err.message);
+      }
 
-    }
-    catch(err){
-      console.log(err);
-    }
-    
+  };
 
-    console.log("Form submitted")
-  }
-  const SignInWithGoogle=async () =>{
-    try{
-      await signInWithPopup(auth,googleProvider);
+  // Google sign-in
+  const SignInWithGoogle = async () => {
+    try {
+     const result = await signInWithPopup(auth, googleProvider);
+      console.log("Google Sign-In:", result.user.email);
+      navigate("/home"); // Redirect after successful login
 
+    } catch (err) {
+      console.error("❌ Google Sign-In error:", err.message);
     }
-    catch(err){
-      console.log(err);
-    }
-
-  }
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
+  };
 
   return (
     <div className="min-h-screen w-full flex justify-end items-center px-8">
@@ -47,6 +47,7 @@ export default function SignupFormDemo() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* First & Last name fields */}
           <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
             <LabelInputContainer>
               <Label htmlFor="firstname">First Name</Label>
@@ -58,16 +59,29 @@ export default function SignupFormDemo() {
             </LabelInputContainer>
           </div>
 
+          {/* Email */}
           <LabelInputContainer>
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" placeholder="projectmayhem@fc.com" type="email" onChange={(e)=>setEmail(e.target.value)}/>
+            <Input
+              id="email"
+              placeholder="projectmayhem@fc.com"
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </LabelInputContainer>
 
+          {/* Password */}
           <LabelInputContainer>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="••••••••" type="password" onChange={(e)=>setPassword(e.target.value)}/>
+            <Input
+              id="password"
+              placeholder="••••••••"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </LabelInputContainer>
 
+          {/* Submit */}
           <button
             type="submit"
             className="group/btn relative w-full rounded-md bg-gradient-to-r from-[#9C43FE] via-[#4CCCEB] to-[#10149A] font-medium text-white shadow-lg hover:from-[#A05BFF] hover:via-[#5CD5F0] hover:to-[#2B2FAF] transition-all duration-200 h-10"
@@ -78,6 +92,7 @@ export default function SignupFormDemo() {
 
           <div className="my-4 h-[1px] w-full bg-white/20" />
 
+          {/* Social Sign-In */}
           <div className="flex flex-col space-y-3">
             <button
               type="button"
@@ -87,6 +102,7 @@ export default function SignupFormDemo() {
               <span>GitHub</span>
               <BottomGradient />
             </button>
+
             <button
               onClick={SignInWithGoogle}
               type="button"

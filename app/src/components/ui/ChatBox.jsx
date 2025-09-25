@@ -66,7 +66,7 @@ export default function ChatBox() {
 
         {/* Input Box */}
         <div className="relative z-20 w-full flex items-center rounded-2xl border border-gray-900 bg-black/80 backdrop-blur-md shadow-2xl transition-all duration-500">
-          <input
+          <textarea
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}

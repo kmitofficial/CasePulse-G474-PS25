@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import MagicBento from "./MagicBento"
+import { HiOutlineSparkles } from "react-icons/hi" // example icon
 
 export default function AssistantBall() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -42,7 +43,7 @@ export default function AssistantBall() {
   const handleMouseMove = (e) => {
     if (!isDragging) return
 
-    const newX = window.innerWidth - (e.clientX - dragOffset.current.x + 40) // very small ball
+    const newX = window.innerWidth - (e.clientX - dragOffset.current.x + 40)
     const newY = window.innerHeight - (e.clientY - dragOffset.current.y + 40)
 
     const boundedX = Math.max(8, Math.min(newX, window.innerWidth - 48))
@@ -87,8 +88,10 @@ export default function AssistantBall() {
         <button
           onClick={toggleExpanded}
           onMouseDown={handleMouseDown}
-          className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110"
-        ></button>
+          className="w-10 h-10 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center text-cyan-500 text-xl"
+        >
+          <HiOutlineSparkles /> {/* Custom icon */}
+        </button>
       </div>
 
       {/* Expanded Bento Box */}
@@ -98,7 +101,7 @@ export default function AssistantBall() {
           className="fixed z-40"
           style={{
             right: `${position.x}px`,
-            bottom: `${position.y + 60}px`, // positioned above smaller ball
+            bottom: `${position.y + 60}px`,
           }}
         >
           <MagicBento
@@ -111,9 +114,9 @@ export default function AssistantBall() {
             clickEffect={true}
             spotlightRadius={300}
             particleCount={12}
-            glowColor="99, 102, 241" // soft indigo (similar to DarkVeil mood)
-            backgroundColor="rgba(15, 15, 35, 0.9)" // deep dark bluish base
-            borderColor="rgba(99, 102, 241, 0.5)" // faint indigo border glow
+            glowColor="99, 102, 241"
+            backgroundColor="rgba(15, 15, 35, 0.9)"
+            borderColor="rgba(99, 102, 241, 0.5)"
           />
         </div>
       )}

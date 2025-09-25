@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import SignupFormDemo from "./pages/Signup"
 import Settings from "./pages/Settings"
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 
@@ -22,10 +23,10 @@ export default function App() {
         {/* Signup Page */}
         <Route path="/signup" element={<LoadingWrapper><SignupFormDemo/></LoadingWrapper>} />
         {/* Chat Page */}
-        <Route path="/Chat" element={<LoadingWrapper><Chat/></LoadingWrapper> } />
+        <Route path="/Chat" element={<ProtectedRoute><LoadingWrapper><Chat/></LoadingWrapper></ProtectedRoute>} />
         {/* Home Page  */}
-        <Route path="/home" element={<LoadingWrapper><Home /></LoadingWrapper>} />
-        <Route path="/settings" element={<LoadingWrapper><Settings/></LoadingWrapper>}/>
+        <Route path="/home" element={<ProtectedRoute><LoadingWrapper><Home /></LoadingWrapper></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><LoadingWrapper><Settings/></LoadingWrapper></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );

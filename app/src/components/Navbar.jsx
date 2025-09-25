@@ -1,6 +1,19 @@
 import React from "react"
+import { useEffect,useState } from "react";
+import { auth } from "../../config/firebase"; // adjust path
+import Avatar from "../components/Avatar"
+import AvatarDropdown from "../components/AvatarDropdown"; 
 
 export default function Navbar() {
+  const [user, setUser] = useState(null);
+  
+  
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+        setUser(currentUser);
+      });
+      return () => unsubscribe();
+    }, []);
   return (
     <nav className="
       absolute left-1/2 top-6
@@ -21,8 +34,10 @@ export default function Navbar() {
       <div className="flex gap-6 items-center pr-2">
         <span className=" text-white text-lg cursor-pointer">Home</span>
         <span className=" text-white text-lg cursor-pointer">About</span>
-        <span className=" text-white text-lg cursor-pointer">Contact</span>
-        <span className=" text-white text-lg cursor-pointer">Login / Sign Up</span>
+        {/* <span className=" text-white text-lg cursor-pointer">Contact</span>
+        <span className=" text-white text-lg cursor-pointer">Login / Sign Up</span> */}
+        {user && <AvatarDropdown user={user} />}
+
       </div>
     </nav>
   )
