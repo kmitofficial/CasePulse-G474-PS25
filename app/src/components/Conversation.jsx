@@ -1,17 +1,38 @@
+// Conversation.jsx
+"use client"
 import { useEffect, useRef } from "react";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../../config/firebase"; // Adjust as needed
 import RotatingText from "./ui/RotatingText";
 
-export default function ChatDisplay({ messages, isLoading }) {
+export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) {
   const messagesEndRef = useRef(null);
   const containerRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
+
+ useEffect(() => {
+  if (!userEmail || !chatId || !messages?.length) return;
+
+  // Get the first user message as the title
+  const firstUserMessage = messages.find(msg => msg.role === "user");
+  const title = firstUserMessage
+    ? firstUserMessage.content.slice(0, 40) // first 40 chars as title
+    : "Untitled";
+
+  setDoc(
+    doc(db, "chats", userEmail, "conversations", chatId),
+    {
+      messages,
+      title,                    // Add title field
+      updatedAt: Date.now(),
+    },
+    { merge: true }
+  ).catch((e) => console.error("Error saving chat:", e));
+}, [userEmail, chatId, messages]);
+
 
   if (!messages || messages.length === 0) return null;
 
@@ -38,8 +59,6 @@ export default function ChatDisplay({ messages, isLoading }) {
             </div>
           </div>
         ))}
-
-        {/* Rotating loader as assistant message */}
         {isLoading && (
           <div className="flex justify-start">
             <div className="max-w-md lg:max-w-xl px-5 py-3.5 rounded-2xl backdrop-blur-md shadow-lg bg-gradient-to-r from-cyan-600 to-cyan-400 text-gray-100 mr-auto border border-gray-700/50">
@@ -63,7 +82,6 @@ export default function ChatDisplay({ messages, isLoading }) {
             </div>
           </div>
         )}
-
         <div ref={messagesEndRef} />
       </div>
     </div>

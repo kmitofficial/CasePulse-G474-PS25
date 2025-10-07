@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase"; // adjust path
 import Avatar from "../components/Avatar"
+import AvatarDropdown from "../components/AvatarDropdown"; 
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Navbar() {
   }, []);
 
   function handleClick() {
-    navigate("/home");
+    navigate("/");
   }
 
   return (
@@ -49,7 +50,8 @@ export default function Navbar() {
         </span>
 
         {/* Profile photo */}
-        {user && <Avatar user={user} />}
+        {user && <AvatarDropdown user={user} />}
+       
 </div>
      
     </nav>

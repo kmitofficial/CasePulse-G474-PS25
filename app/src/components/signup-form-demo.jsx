@@ -4,6 +4,7 @@ import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom";
+
 import { auth, googleProvider } from "../../config/firebase"
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { useState } from "react"
@@ -19,7 +20,7 @@ export default function SignupFormDemo() {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log("Signed up as:", userCredential.user.email);
-        navigate("/home"); // Redirect after successful signup
+        navigate("/"); // Redirect after successful signup
       } catch (err) {
         console.error("Signup error:", err.message);
       }
@@ -31,7 +32,7 @@ export default function SignupFormDemo() {
     try {
      const result = await signInWithPopup(auth, googleProvider);
       console.log("Google Sign-In:", result.user.email);
-      navigate("/home"); // Redirect after successful login
+      navigate("/"); // Redirect after successful login
 
     } catch (err) {
       console.error("❌ Google Sign-In error:", err.message);

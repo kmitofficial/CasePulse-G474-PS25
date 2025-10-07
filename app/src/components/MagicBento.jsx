@@ -1,6 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { Switch } from "@/components/ui/switch";
+import AnimatedList from './AnimatedList'
+import { collection, getDocs } from "firebase/firestore";
+import { db, auth } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { History } from "lucide-react";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -19,32 +24,28 @@ const cardData = [
     title: 'Dashboard',
     description: 'Switch between Indian & US law datasets',
     label: 'Jurisdiction Toggle',
-    type:'toggle'
+    type: 'toggle'
   },
   {
     color: '#060010',
-    title: 'Top k Docs',
-    description: 'Share case notes & annotations with your team',
-    label: 'Document Drafting'
+    label: 'Chat History'
   },
   {
     color: '#060010',
-    title: 'Automation',
-    description: 'Generate contracts, notices & petitions automatically',
-    label: 'Automation'
+    label: 'Top 5 Retrived Docs'
   },
-  {
-    color: '#060010',
-    title: 'Integration',
-    description: 'Find precedents & compare case laws',
-    label: 'Legal Research'
-  },
-  {
-    color: '#060010',
-    title: 'Security',
-    description: 'Secure client data & ensure compliance',
-    label: 'Confidentiality'
-  }
+  // {
+  //   color: '#060010',
+  //   title: 'Integration',
+  //   description: 'Find precedents & compare case laws',
+  //   label: 'Legal Research'
+  // },
+  // {
+  //   color: '#060010',
+  //   title: 'Security',
+  //   description: 'Secure client data & ensure compliance',
+  //   label: 'Confidentiality'
+  // }
 ];
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
@@ -169,28 +170,16 @@ const ParticleCard = ({
     });
   }, [initializeParticles]);
   // at the top of MagicBento
-const syntheticDocs = [
-  { title: "Case_Analysis_1" },
-  { title: "Contract_Template_2.docx" },
-  { title: "Notice_Draft_3.docx" },
-  { title: "Petition_Summary_4.pdf" },
-  { title: "Judgment_Highlights_5.pdf" }
-];
+  const syntheticDocs = [
+    { title: "Case_Analysis_1" },
+    { title: "Contract_Template_2.docx" },
+    { title: "Notice_Draft_3.docx" },
+    { title: "Petition_Summary_4.pdf" },
+    { title: "Judgment_Highlights_5.pdf" }
+  ];
 
-const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
+  const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
 
-useEffect(() => {
-  const fetchDocs = async () => {
-    try {
-      const res = await fetch("/api/fused_files"); // adjust endpoint
-      const data = await res.json();
-      setDocs(data.slice(0, 5)); // keep only 5
-    } catch (err) {
-      console.error("Error fetching docs:", err);
-    }
-  };
-  fetchDocs();
-}, []);
 
 
   useEffect(() => {
@@ -516,17 +505,19 @@ const MagicBento = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
   const [isUS, setIsUS] = useState(false); // false = Indian, true = US
-    // at the top of MagicBento
   // at the top of MagicBento
-const syntheticDocs = [
-  { title: "Case_Analysis_1.pdf" },
-  { title: "Contract_Template_2.docx" },
-  { title: "Notice_Draft_3.docx" },
-  { title: "Petition_Summary_4.pdf" },
-  { title: "Judgment_Highlights_5.pdf" }
-];
+  // at the top of MagicBento
+  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10'];
+  const Rdocs = ['Doc 1', 'Doc 2', 'Doc 3', 'Doc 4', 'Doc 5'];
+  const syntheticDocs = [
+    { title: "Case_Analysis_1.pdf" },
+    { title: "Contract_Template_2.docx" },
+    { title: "Notice_Draft_3.docx" },
+    { title: "Petition_Summary_4.pdf" },
+    { title: "Judgment_Highlights_5.pdf" }
+  ];
 
-const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
+  const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
 
 
   useEffect(() => {
@@ -541,6 +532,34 @@ const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
     };
     fetchDocs();
   }, []);
+  const [user] = useAuthState(auth);
+  const [conversations, setConversations] = useState([]);
+  const chatTitles = conversations
+    .slice() // create a copy
+    .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)) // newest first
+    .map(c => c.title || "Untitled");
+
+
+  useEffect(() => {
+    async function fetchTitles() {
+      if (!user?.email) return;
+      // LOG for debugging
+      console.log("Fetching chats for:", user.email);
+
+      const convRef = collection(db, "chats", user.email, "conversations");
+      const snapshot = await getDocs(convRef);
+      console.log("Found docs:", snapshot.docs.length);
+
+      setConversations(snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })));
+    }
+    fetchTitles();
+  }, [user]);
+
+  if (!user?.email) return <div>Not logged in!</div>;
+  if (!conversations.length) return <div>No conversations found.</div>;
 
 
 
@@ -581,9 +600,10 @@ const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
             }
             
             .card-responsive .card:nth-child(3) {
+            height: 485px;
               
               grid-column: span 2;
-              grid-row: span 2;
+              grid-row: span 3;
             }
             
             .card-responsive .card:nth-child(4) {
@@ -687,9 +707,8 @@ const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
       <BentoCardGrid gridRef={gridRef}>
         <div className="card-responsive grid gap-2">
           {cardData.map((card, index) => {
-            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
-              enableBorderGlow ? 'card--border-glow' : ''
-            }`;
+            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${enableBorderGlow ? 'card--border-glow' : ''
+              }`;
 
             const cardStyle = {
               backgroundColor: card.color || 'var(--background-dark)',
@@ -704,75 +723,93 @@ const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
             if (enableStars) {
               return (
                 <ParticleCard
-  key={index}
-  className={baseClassName}
-  style={cardStyle}
-  disableAnimations={shouldDisableAnimations}
-  particleCount={particleCount}
-  glowColor={glowColor}
-  enableTilt={enableTilt}
-  clickEffect={clickEffect}
-  enableMagnetism={enableMagnetism}
->
-  <div className="card__header flex justify-between gap-3 relative text-white">
-    <span className="card__label text-base">{card.label}</span>
-  </div>
+                  key={index}
+                  className={baseClassName}
+                  style={cardStyle}
+                  disableAnimations={shouldDisableAnimations}
+                  particleCount={particleCount}
+                  glowColor={glowColor}
+                  enableTilt={enableTilt}
+                  clickEffect={clickEffect}
+                  enableMagnetism={enableMagnetism}
+                >
+                  <div className="card__header flex justify-between gap-3 relative text-white">
+                    <span className="card__label text-base">{card.label}</span>
+                  </div>
 
-  <div className="card__content flex flex-col relative text-white">
-    {/* Toggle card */}
-    {card.type === 'toggle' ? (
-      <div className="flex items-center gap-2 mt-2 text-sm">
-        <span
-          className={`text-xs font-medium transition-opacity ${
-            !isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
-          }`}
-        >
-          Indian
-        </span>
+                  <div className="card__content flex flex-col relative text-white">
+                    {/* Toggle card */}
+                    {card.type === 'toggle' ? (
+                      <div className="flex items-center gap-2 mt-2 text-sm">
+                        <span
+                          className={`text-xs font-medium transition-opacity ${!isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                            }`}
+                        >
+                          Indian
+                        </span>
 
-        <Switch
-          checked={isUS}
-          onCheckedChange={(checked) => setIsUS(checked)}
-          className="w-10 h-5 bg-[#060010] border border-gray-700"
-        />
+                        <Switch
+                          checked={isUS}
+                          onCheckedChange={(checked) => setIsUS(checked)}
+                          className="w-10 h-5 bg-[#060010] border border-gray-700"
+                        />
 
-        <span
-          className={`text-xs font-medium transition-opacity ${
-            isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
-          }`}
-        >
-          US
-        </span>
-      </div>
-    ) : card.label === "Document Drafting" ? (
-      // Top 5 docs for Document Drafting
-      <div className="space-y-2 mt-2">
-        <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
-        <ul className="text-xs space-y-1">
-          {docs.length > 0 ? (
-            docs.map((doc, i) => (
-              <li key={i} className="truncate text-gray-300">
-                • {doc.title || `Doc ${i + 1}`}
-              </li>
-            ))
-          ) : (
-            <li className="text-gray-500 italic">Loading...</li>
-          )}
-        </ul>
-      </div>
-    ) : (
-      // Default card title & description
-      <>
-        <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-          {card.title}
-        </h3>
-        <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
-          {card.description}
-        </p>
-      </>
-    )}
-  </div>
-</ParticleCard>
+                        <span
+                          className={`text-xs font-medium transition-opacity ${isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                            }`}
+                        >
+                          US
+                        </span>
+                      </div>
+                    ) : card.label === "Document Drafting" ? (
+                      // Top 5 docs for Document Drafting
+                      <div className="space-y-2 mt-2">
+                        <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
+                        <ul className="text-xs space-y-1">
+                          {docs.length > 0 ? (
+                            docs.map((doc, i) => (
+                              <li key={i} className="truncate text-gray-300">
+                                • {doc.title || `Doc ${i + 1}`}
+                              </li>
+                            ))
+                          ) : (
+                            <li className="text-gray-500 italic">Loading...</li>
+                          )}
+                        </ul>
+                      </div>
+                    ) : card.label === "Chat History" ? (
+                      // Render AnimatedList for Chat History
+                      <AnimatedList
+                        items={conversations}           // <-- pass objects, not strings
+                        historyList={true}
+                        onItemSelect={(item, index) => console.log(item, index)}
+                        showGradients={true}
+                        enableArrowNavigation={true}
+                        displayScrollbar={false}
+                      />
+                    ) : card.label === "Top 5 Retrived Docs" ? (
+                      // Render AnimatedList for Chat History
+                      <AnimatedList
+                        items={Rdocs}
+                        onItemSelect={(item, index) => console.log(item, index)}
+                        showGradients={true}
+                        enableArrowNavigation={true}
+                        displayScrollbar={false}
+                      />
+                    ) : (
+                      // Default card title & description
+                      <>
+                        <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                          {card.title}
+                        </h3>
+                        <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+                          {card.description}
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                </ParticleCard>
 
               );
             }
@@ -897,30 +934,30 @@ const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
                 </div>
                 <div className="card__content flex flex-col relative text-white">
                   {card.label === "Document Drafting" ? (
-                  <div className="space-y-2 mt-2">
-                    <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
-                    <ul className="text-xs space-y-1">
-                      {docs.length > 0 ? (
-                        docs.map((doc, i) => (
-                          <li key={i} className="truncate text-gray-300">
-                            • {doc.title || doc.name || `Doc ${i + 1}`}
-                          </li>
-                        ))
-                      ) : (
-                        <li className="text-gray-500 italic">Loading...</li>
-                      )}
-                    </ul>
-                  </div>
-                ) : (
-                  <>
-                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-                      {card.title}
-                    </h3>
-                    <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
-                      {card.description}
-                    </p>
-                  </>
-                )}
+                    <div className="space-y-2 mt-2">
+                      <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
+                      <ul className="text-xs space-y-1">
+                        {docs.length > 0 ? (
+                          docs.map((doc, i) => (
+                            <li key={i} className="truncate text-gray-300">
+                              • {doc.title || doc.name || `Doc ${i + 1}`}
+                            </li>
+                          ))
+                        ) : (
+                          <li className="text-gray-500 italic">Loading...</li>
+                        )}
+                      </ul>
+                    </div>
+                  ) : (
+                    <>
+                      <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                        {card.title}
+                      </h3>
+                      <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+                        {card.description}
+                      </p>
+                    </>
+                  )}
 
                 </div>
               </div>

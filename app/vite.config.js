@@ -5,11 +5,15 @@ import tailwindcss from "@tailwindcss/vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss()],
-  assetsInclude: ['**/*.glb', '**/*.png'], 
+  plugins: [react(), tailwindcss()],
+  assetsInclude: ['**/*.glb', '**/*.png'],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  base: './', // ✅ important for Vercel deployment
+  build: {
+    outDir: 'dist', // default for Vite, ensures vercel.json points to correct folder
   },
 })
