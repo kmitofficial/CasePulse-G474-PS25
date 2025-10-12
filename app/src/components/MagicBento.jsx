@@ -742,7 +742,7 @@ const MagicBento = ({
                     {card.type === 'toggle' ? (
                       <div className="flex items-center gap-2 mt-2 text-sm">
                         <span
-                          className={`text-xs font-medium transition-opacity ${!isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                          className={`text-m font-medium transition-opacity ${!isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
                             }`}
                         >
                           Indian
@@ -755,7 +755,7 @@ const MagicBento = ({
                         />
 
                         <span
-                          className={`text-xs font-medium transition-opacity ${isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
+                          className={`text-m font-medium transition-opacity ${isUS ? "opacity-100 text-white" : "opacity-50 text-gray-400"
                             }`}
                         >
                           US

@@ -3,9 +3,13 @@ import { useEffect,useState } from "react";
 import { auth } from "../../config/firebase"; // adjust path
 import Avatar from "../components/Avatar"
 import AvatarDropdown from "../components/AvatarDropdown"; 
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   
   
     useEffect(() => {
@@ -14,6 +18,15 @@ export default function Navbar() {
       });
       return () => unsubscribe();
     }, []);
+
+    function handleDataClick() {
+    
+    console.log("Clicked")
+    navigate("/Datasets");
+  }
+  function handleClick() {
+    navigate("/");
+  }
   return (
     <nav className="
       absolute left-1/2 top-6
@@ -32,7 +45,13 @@ export default function Navbar() {
         <span className="text-xl text-white tracking-tight">Case Bridge</span>
       </div>
       <div className="flex gap-6 items-center pr-2">
-        <span className=" text-white text-lg cursor-pointer">Home</span>
+        <span
+          className="text-white text-lg cursor-pointer"
+          onClick={handleClick}
+        >
+          Home
+        </span>
+        <span className=" text-white text-lg cursor-pointer" onClick={handleDataClick}>Datasets</span>
         <span className=" text-white text-lg cursor-pointer">About</span>
         {/* <span className=" text-white text-lg cursor-pointer">Contact</span>
         <span className=" text-white text-lg cursor-pointer">Login / Sign Up</span> */}

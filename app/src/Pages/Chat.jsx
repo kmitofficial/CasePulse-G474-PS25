@@ -11,6 +11,7 @@ import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../../config/firebase.js"
+import  NewChatButton from "../components/plus.jsx"
 
 export default function Chat() {
  
@@ -42,19 +43,22 @@ if (!user?.email) return <div>Please log in to chat.</div>
           speed={0.5}
           resolutionScale={1}
         />
+        
       </div>
-
+      <NewChatButton/>
       <AssistantBall />
 
       <ChatBox
-  style={{
-    position: "relative",
-    zIndex: 70,
-    filter: "brightness(1.5) contrast(1.2)",
-  }}
-  chatId={chatId}
-  userEmail={user.email}
-/>
+        key={chatId}
+        style={{
+          position: "relative",
+          zIndex: 70,
+          filter: "brightness(1.5) contrast(1.2)",
+        }}
+        chatId={chatId}
+        userEmail={user.email}
+      />
+      
 
     
 

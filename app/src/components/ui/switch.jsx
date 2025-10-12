@@ -8,8 +8,7 @@ function Switch({ className, ...props }) {
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        "peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-gray-700 shadow-xs transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50",
-        // Custom background colors
+        "peer inline-flex h-8 w-16 shrink-0 items-center rounded-full border border-gray-700 shadow-xs transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50",
         "data-[state=checked]:bg-indigo-600 data-[state=unchecked]:bg-[#060010]",
         className
       )}
@@ -18,13 +17,15 @@ function Switch({ className, ...props }) {
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          "block h-4 w-4 rounded-full bg-white transition-transform",
-          "data-[state=checked]:translate-x-[calc(100%-0.25rem)]",
+          "block h-7 w-7 rounded-full bg-white transition-transform",
+          // For h-8 (32px) track and w-7 (28px) thumb: 32-28=4px slide + 4px left padding = 36px = 2.25rem
+          "data-[state=checked]:translate-x-[2.25rem]",
           "data-[state=unchecked]:translate-x-0"
         )}
       />
     </SwitchPrimitive.Root>
   );
 }
+
 
 export { Switch };

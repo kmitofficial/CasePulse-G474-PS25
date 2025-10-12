@@ -8,6 +8,8 @@ import LoadingWrapper from "./components/LoadWrapper";
 import { v4 as uuidv4 } from "uuid";
 import ConversationList from "./components/ConversationList"
 
+import Datasets from "./pages/Datasets"
+
 // Redirects /chat to /chat/:uuid
 function ChatRedirect() {
   const chatId = uuidv4();
@@ -21,13 +23,14 @@ export default function App() {
         {/* Signup Page */}
         <Route path="/signup" element={<LoadingWrapper><SignupFormDemo/></LoadingWrapper>} />
         {/* Chat Page "entry" redirects to chat/:chatId */}
-        <Route path="/chat" element={<ChatRedirect />} />
+        <Route path="/chat" element={<LoadingWrapper><ChatRedirect /></LoadingWrapper>} />
         <Route path="/s" element={<ConversationList/>} />
         {/* Chat Page with chatId */}
-        <Route path="/chat/:chatId" element={<Chat />} />
+        <Route path="/chat/:chatId" element={<LoadingWrapper><Chat /></LoadingWrapper>} />
         {/* Home Page */}
         <Route path="/" element={<ProtectedRoute><LoadingWrapper><Home /></LoadingWrapper></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><LoadingWrapper><Settings/></LoadingWrapper></ProtectedRoute>} />
+        <Route path="/Datasets" element={<ProtectedRoute><LoadingWrapper><Datasets/></LoadingWrapper></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
