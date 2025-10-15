@@ -45,7 +45,7 @@ if (!user?.email) return <div>Please log in to chat.</div>
         />
         
       </div>
-      <NewChatButton/>
+      
       <AssistantBall />
 
       <ChatBox

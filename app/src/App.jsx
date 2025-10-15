@@ -3,7 +3,7 @@ import SignupFormDemo from "./pages/Signup";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home.jsx";
-import About from "./Pages/About";
+import About from "./pages/About";
 import Chat from "./pages/Chat";
 import LoadingWrapper from "./components/LoadWrapper";
 import { v4 as uuidv4 } from "uuid";

@@ -1,62 +1,185 @@
-import React from "react";
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
-function About(){
-  return(
-    <div className="font-sans text-gray-100 bg-gray-950 scroll-smooth">
+import React from "react"
+import Beams from "../components/ui/Beams"
+import Navbar from "@/components/Navbar"
+import GradientText from "@/components/GradientText"
+import { Card, CardContent } from "@/components/ui/card"
+import { Github, Linkedin } from "lucide-react"
+
+const team = [
+  {
+    name: "B CHARAN REDDY",
+    src:"../contribtrs/a5.png",
+    role: "Founder & Lead Engineer",
+    bio: "Drives product vision and architecture, ensuring performance, accessibility, and reliability.",
+    links: { github: "#", linkedin: "#" },
+  },
+  {
+    name: "Nampally Mahesh",
+    src:"../contribtrs/b9.png",
+    role: "ML Engineer",
+    bio: "Builds retrieval and summarization pipelines, focusing on evaluation and model quality.",
+    links: { github: "#", linkedin: "#" },
+  },
+  {
+    name: "Nikhilesh Nilagiri ",
+    src:"../contribtrs/ba.png",
+    role: "Frontend Engineer",
+    bio: "Owns the UI system and design consistency across the app for a cohesive experience.",
+    links: { github: "#", linkedin: "#" },
+  },
+  {
+    name: "P Hrithik Raj",
+    src:"../contribtrs/bb.png",
+    role: "Data Engineer",
+    bio: "Handles data pipelines and ensures reliable ingestion and processing of case law datasets.",
+    links: { github: "#", linkedin: "#" },
+  },
+  {
+    name: "Tankasala Akshaya",
+    src:"../contribtrs/bk.png",
+    role: "Research Analyst",
+    bio: "Analyzes legal data and helps improve model accuracy and retrieval strategies.",
+    links: { github: "#", linkedin: "#" },
+  },
+]
+
+const contributors = ["Contributor A", "Contributor B", "Contributor C", "Contributor D"]
+
+export default function About() {
+  return (
+    <div className="relative min-h-screen bg-black text-white">
+
+      {/* Navbar */}
       <Navbar className="relative z-20" />
 
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[url('/court1.jpg')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-gray-950/90"></div>
-        <motion.div initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{duration:1}} className="relative z-10 text-center">
-          <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-lg">Case Bridge</h1>
-          <p className="text-xl mt-4 text-gray-300">Where Artificial Intelligence meets the Law</p>
-          <motion.button whileHover={{scale:1.05,boxShadow:"0 0 20px rgba(59,130,246,0.6)"}} className="mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 px-10 rounded-full text-lg font-medium transition-all">Get Started</motion.button>
-        </motion.div>
-        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8,duration:1.2}} className="absolute bottom-10 w-full text-center text-gray-400 text-sm tracking-widest">Scroll Down ↓</motion.div>
-      </section>
+      {/* Background Beams */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          overflow: "hidden",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <Beams
+          beamWidth={2}
+          beamHeight={15}
+          beamNumber={12}
+          lightColor="from-cyan-600 to-cyan-400"
+          speed={5}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={1}
+        />
+      </div>
 
-      <section className="relative py-24 px-6 bg-gradient-to-b from-gray-950 to-gray-900 text-center">
-        <motion.h2 initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">About Case Bridge</motion.h2>
-        <motion.p initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.8}} className="max-w-3xl mx-auto text-lg leading-relaxed text-gray-300">
-          Case Bridge redefines how you access legal intelligence. Our AI maps your queries to the most relevant case laws and delivers concise, context-aware summaries. We empower lawyers, students, and citizens to understand the law faster and smarter.
-        </motion.p>
-      </section>
+      {/* Main Content */}
+      <main className="relative z-10 px-4 pt-24 sm:pt-32 pb-12">
+        <section className="max-w-7xl mx-auto rounded-lg border border-gray-800 bg-transparent backdrop-blur-sm p-6 md:p-10">
+          <div className="mb-8 text-center">
+            <GradientText
+              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+              animationSpeed={3}
+              showBorder={false}
+              className="custom-class sm:text-6xl font-bold"
+            >
+              About Us
+            </GradientText>
+            <p className="mt-4 text-xl md:text-2xl text-white">
+              We’re a small, focused team dedicated to building clear, fast, and trustworthy tools. Our work is
+              collaborative and pragmatic—every improvement is driven by real user needs and measurable outcomes.
+            </p>
+          </div>
 
-      <section className="relative py-32 bg-[url('/court2.jpg')] bg-fixed bg-center bg-cover overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-950/90 to-black/70 backdrop-blur-[2px]"></div>
-        <div className="relative z-10 grid md:grid-cols-3 gap-8 px-6 max-w-6xl mx-auto">
-          {["Smart Search","Legal Summaries","AI Insights"].map((title,i)=>(
-            <motion.div key={i} initial={{opacity:0,y:50}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.2}} className="p-8 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md shadow-xl hover:bg-white/15 transition-all hover:scale-[1.03]">
-              <h3 className="text-2xl font-semibold text-blue-300 mb-3">{title}</h3>
-              <p className="text-gray-300">Harness the power of AI to retrieve, analyze, and summarize case laws efficiently — transforming how justice research works.</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+          <div className="h-px w-full bg-gray-800 my-8" />
 
-      <section className="py-24 px-6 bg-gradient-to-b from-black to-gray-950 text-center">
-        <motion.h2 initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Our Vision</motion.h2>
-        <motion.p initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.8}} className="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
-          We believe in a future where technology ensures fairness, clarity, and speed in the legal system — bridging every gap between human insight and machine precision.
-        </motion.p>
-      </section>
+          {/* Team Section */}
+          <section aria-labelledby="core-team" className="mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {team.map((member, i) => (
+                <Card
+                  key={i}
+                  className="rounded-md border-gray-800 bg-black/50 hover:bg-black/60 transition-colors"
+                >
+                  <CardContent className="p-6">
+                    <div className="w-20 h-20 mb-4 rounded-full overflow-hidden border border-gray-800">
+                      <img
+                        src={`${member.src}`}
+                        alt={`${member.name} avatar`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-      <section className="relative h-[90vh] flex items-center justify-center bg-fixed bg-cover bg-center" style={{backgroundImage:"url('/court3.jpeg')"}}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-gray-950"></div>
-        <motion.div initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} transition={{duration:1}} className="relative z-10 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-2xl">Step Into the Future of Law</h2>
-          <motion.button whileHover={{scale:1.08,boxShadow:"0 0 25px rgba(59,130,246,0.7)"}} className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 px-12 rounded-full text-lg font-semibold shadow-lg transition-all">
-            Explore Case Bridge
-          </motion.button>
-        </motion.div>
-      </section>
+                    <h3 className="text-white text-2xl font-semibold leading-tight">{member.name}</h3>
+                    <p className="text-lg text-white">{member.role}</p>
 
-      <footer className="py-8 text-center bg-gray-950 text-gray-500 border-t border-gray-800 text-sm">
-        <p>© {new Date().getFullYear()} Case Bridge — Reimagining Legal Intelligence.</p>
+                    <p className="mt-3 text-base leading-relaxed text-white">{member.bio}</p>
+
+                    <div className="mt-4 flex items-center gap-4">
+                      <a
+                        href={member.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-base text-white hover:text-foreground transition-colors"
+                      >
+                        <Github size={20} />
+                        <span>GitHub</span>
+                      </a>
+                      <a
+                        href={member.links.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-base text-white hover:text-foreground transition-colors"
+                      >
+                        <Linkedin size={20} />
+                        <span>LinkedIn</span>
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <div className="h-px w-full bg-gray-800 my-6" />
+
+          {/* Contributors */}
+          <section aria-labelledby="contributors">
+            <div className="mb-4">
+              <GradientText
+                colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="custom-class sm:text-4xl font-semibold"
+              >
+                Contributors
+              </GradientText>
+              <p className="mt-2 text-base text-white">
+                Thank you to everyone who has helped improve this project.
+              </p>
+            </div>
+
+            <ul className="flex flex-wrap gap-4">
+              {contributors.map((name, i) => (
+                <li
+                  key={i}
+                  className="px-4 py-2 rounded-full border border-gray-800 bg-black/50 text-base text-white hover:text-foreground hover:bg-black/60 transition-colors"
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </section>
+      </main>
+
+      <footer className="relative z-10 py-6 text-center text-white text-base">
+        <p>&copy; {new Date().getFullYear()} Case Bridge. All rights reserved.</p>
       </footer>
     </div>
-  );
+  )
 }
-
-export default About;
