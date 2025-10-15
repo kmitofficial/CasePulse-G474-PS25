@@ -50,7 +50,7 @@ export default function Datasets() {
           beamWidth={2}
           beamHeight={15}
           beamNumber={12}
-          lightColor="#00FFF7"
+          lightColor="#7B2FF7"
           speed={2}
           noiseIntensity={1.75}
           scale={0.2}

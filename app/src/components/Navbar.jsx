@@ -22,7 +22,12 @@ export default function Navbar() {
     function handleDataClick() {
     
     console.log("Clicked")
-    navigate("/Datasets");
+    navigate("/Datasets");  
+  }
+    function handleAboutClick() {
+    
+    console.log("Clicked")
+    navigate("/About");  
   }
   function handleClick() {
     navigate("/");
@@ -52,7 +57,7 @@ export default function Navbar() {
           Home
         </span>
         <span className=" text-white text-lg cursor-pointer" onClick={handleDataClick}>Datasets</span>
-        <span className=" text-white text-lg cursor-pointer">About</span>
+        <span className=" text-white text-lg cursor-pointer" onClick={handleAboutClick}>About</span>
         {/* <span className=" text-white text-lg cursor-pointer">Contact</span>
         <span className=" text-white text-lg cursor-pointer">Login / Sign Up</span> */}
         {user && <AvatarDropdown user={user} />}
