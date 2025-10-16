@@ -14,7 +14,10 @@ import { auth } from "../../config/firebase.js"
 import  NewChatButton from "../components/plus.jsx"
 
 export default function Chat() {
- 
+
+  const [isUS, setIsUS] = useState(true); // false = Indian, true = US
+  const [selectedSearchMethod, setSelectedSearchMethod] = useState("bm25");
+
   
   const items = [
     "Item 1","Item 2","Item 3","Item 4","Item 5",
@@ -22,6 +25,13 @@ export default function Chat() {
   ]
    const { chatId } = useParams()
   const [user, loading, error] = useAuthState(auth)
+    useEffect(() => {
+    console.log("isUS changed:", isUS);
+  }, [isUS]);
+
+  useEffect(() => {
+    console.log("selectedSearchMethod changed:", selectedSearchMethod);
+  }, [selectedSearchMethod]);
 
   if (loading) return <div>Loading auth...</div>
   if (error) return <div>Authentication error: {error.message}</div>
@@ -46,7 +56,10 @@ if (!user?.email) return <div>Please log in to chat.</div>
         
       </div>
       
-      <AssistantBall />
+      <AssistantBall isUS={isUS}
+        setIsUS={setIsUS}
+        selectedSearchMethod={selectedSearchMethod}
+        setSelectedSearchMethod={setSelectedSearchMethod}/>
 
       <ChatBox
         key={chatId}
@@ -57,6 +70,8 @@ if (!user?.email) return <div>Please log in to chat.</div>
         }}
         chatId={chatId}
         userEmail={user.email}
+        isUS={isUS}
+        selectedSearchMethod={selectedSearchMethod}
       />
       
 

@@ -53,7 +53,7 @@ export default function About() {
       <Navbar className="relative z-20" />
 
       {/* Background Beams */}
-      <div
+      {/* <div
         style={{
           position: "fixed",
           top: 0,
@@ -75,7 +75,7 @@ export default function About() {
           scale={0.2}
           rotation={1}
         />
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <main className="relative z-10 px-4 pt-24 sm:pt-32 pb-12">

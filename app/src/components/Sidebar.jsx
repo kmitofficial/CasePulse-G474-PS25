@@ -4,13 +4,17 @@ import { useState, useRef, useEffect } from "react"
 import MagicBento from "./MagicBento"
 import { HiOutlineSparkles } from "react-icons/hi" // example icon
 
-export default function AssistantBall() {
+export default function AssistantBall({ isUS,
+  setIsUS,
+  selectedSearchMethod,
+  setSelectedSearchMethod}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [position, setPosition] = useState({ x: 24, y: 24 })
   const ballRef = useRef(null)
   const expandedRef = useRef(null)
   const dragOffset = useRef({ x: 0, y: 0 })
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -116,8 +120,12 @@ export default function AssistantBall() {
             particleCount={12}
             glowColor="99, 102, 241"
             backgroundColor="rgba(15, 15, 35, 0.9)"
-            borderColor="rgba(99, 102, 241, 0.5)"
-          />
+            borderColor="rgba(99, 102, 241, 0.5)" // ✅ Pass lifted state as props
+        isUS={isUS}
+            setIsUS={setIsUS}
+            selectedSearchMethod={selectedSearchMethod}
+            setSelectedSearchMethod={setSelectedSearchMethod}
+      />
         </div>
       )}
     </>

@@ -38,9 +38,9 @@ The goal of CaseBridge is to provide a unified framework for both case retrieval
 Watch a demo of CaseBridge in action:  
 
 <video width="640" height="360" controls>
-  <source src="app/public/demo-video/demo.mp4" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/kmitofficial/CasePulse-G474-PS25/dev/app/public/demo-video/demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
-</video>  
+</video>
 
 ---
 

@@ -6,7 +6,9 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { History } from "lucide-react";
-
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css';
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = '132, 0, 255';
@@ -17,7 +19,7 @@ const cardData = [
     color: '#060010',
     title: 'Analytics',
     description: 'Summarize judgments & highlight key points',
-    label: 'Case Insights'
+    label: 'Search Method'
   },
   {
     color: '#060010',
@@ -499,12 +501,19 @@ const MagicBento = ({
   enableTilt = false,
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
-  enableMagnetism = true
+  enableMagnetism = true,
+
+  // ✅ lifted state from parent
+  isUS,
+  setIsUS,
+  selectedSearchMethod,
+  setSelectedSearchMethod
 }) => {
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
-  const [isUS, setIsUS] = useState(false); // false = Indian, true = US
+
+
   // at the top of MagicBento
   // at the top of MagicBento
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10'];
@@ -559,7 +568,7 @@ const MagicBento = ({
   }, [user]);
 
   if (!user?.email) return <div>Not logged in!</div>;
-  if (!conversations.length) return <div>No conversations found.</div>;
+
 
 
 
@@ -779,24 +788,82 @@ const MagicBento = ({
                       </div>
                     ) : card.label === "Chat History" ? (
                       // Render AnimatedList for Chat History
+                      conversations.length > 0 ? (
                       <AnimatedList
-                        items={conversations}           // <-- pass objects, not strings
+                        items={conversations}
                         historyList={true}
                         onItemSelect={(item, index) => console.log(item, index)}
                         showGradients={true}
                         enableArrowNavigation={true}
                         displayScrollbar={false}
                       />
+                    ) : (
+                      <div className="text-gray-500 italic mt-2">No conversations yet</div>
+                    )
+
                     ) : card.label === "Top 5 Retrived Docs" ? (
                       // Render AnimatedList for Chat History
+                      Rdocs.length > 0?(
                       <AnimatedList
                         items={Rdocs}
                         onItemSelect={(item, index) => console.log(item, index)}
                         showGradients={true}
                         enableArrowNavigation={true}
                         displayScrollbar={false}
-                      />
-                    ) : (
+                      />):
+                      (
+                      <div className="text-gray-500 italic mt-2">No conversations yet</div>
+                    )
+                  ) : card.label === "Search Method" ? (
+  <div className="flex flex-col gap-4 px-2 py-1">
+    {[
+      { id: 'bm25', label: 'BM25', info: 'Lexical Search' },
+      { id: 'legalbert', label: 'LegalBERT', info: 'Semantic Search' },
+      { id: 'hybrid', label: 'Hybrid', info: 'Combines Both' },
+    ].map((method) => (
+      <div
+        key={method.id}
+        className="flex items-center justify-between cursor-pointer"
+      >
+        {/* Radio + Label */}
+        <label className="flex items-center gap-3 cursor-pointer text-white text-base">
+          <input
+            type="radio"
+            name="searchMethod"
+            value={method.id}
+            checked={selectedSearchMethod === method.id}
+           onChange={() => setSelectedSearchMethod(method.id)} // use prop callback
+            className="accent-blue-500 cursor-pointer w-4 h-4"
+          />
+          <span>{method.label}</span>
+        </label>
+
+        {/* Info Button with Tooltip */}
+        <span
+          data-tooltip-id={`tooltip-${method.id}`}
+          data-tooltip-content={method.info}
+          className="text-gray-400 hover:text-white text-xl cursor-pointer"
+        >
+          <AiOutlineInfoCircle />
+        </span>
+
+<ReactTooltip
+  id={`tooltip-${method.id}`}
+  place="right"
+  effect="solid"
+  className="!bg-[#1e1e2f] !text-white !text-sm !px-3 !py-2 !rounded-md !z-[9999]"
+  // THIS ensures tooltip uses body and ignores parent overflow
+  portal={true}
+/>
+
+
+      </div>
+    ))}
+  </div>
+) : (
+
+
+
                       // Default card title & description
                       <>
                         <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>

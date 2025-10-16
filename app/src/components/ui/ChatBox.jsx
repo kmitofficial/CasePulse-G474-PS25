@@ -7,7 +7,7 @@ import ChatDisplay from "../Conversation"
 import RotatingText from "./RotatingText"
 import NewChatButton from "../plus"  // ✅ your button
 
-export default function ChatBox({ chatId, userEmail }) {
+export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod }) {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -53,10 +53,20 @@ export default function ChatBox({ chatId, userEmail }) {
     setIsLoading(true)
 
     try {
+      console.log({
+  query: input,
+  jurisdiction: isUS ? "US" : "IN",
+  retrieval_model: selectedSearchMethod
+});
+
       const res = await fetch("http://localhost:5000/submit_query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({
+        query: input,
+        jurisdiction: isUS ? "US" : "IN",         // send jurisdiction
+        retrieval_model: selectedSearchMethod,   // send retrieval model
+      }),
       })
       if (!res.ok) throw new Error("API not found")
       const data = await res.json()
