@@ -39,7 +39,7 @@ export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) 
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-20 left-1/2 -translate-x-1/2 w-[85vw] max-w-4xl px-6 max-h-[60vh] overflow-y-auto scrollbar-hide"
+      className="fixed bottom-20 left-1/2 -translate-x-1/2 w-[85vw] max-w-4xl px-6 max-h-[80vh] overflow-y-auto scrollbar-hide"
       style={{ background: "transparent", zIndex: 15 }}
     >
       <div className="flex flex-col gap-5 pb-4">

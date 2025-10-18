@@ -1,26 +1,25 @@
 "use client"
 import SignupFormDemo from "../components/signup-form-demo"
+import login from "../components/signup-form-demo"
+import LoginFormDemo from "../components/login"
 import Lanyard from "../components/Lanyard"
 import DarkVeil from "../components/DarkVeil"
-import { useLocation } from "react-router-dom";
-import MessagePopup from "../components/Popup";
-import { useState,useEffect } from "react";
+import { useState } from "react"
 
 export default function SignupPage() {
-  const location = useLocation();
-//   const [showPopup, setShowPopup] = useState(false);
-//    useEffect(() => {
-//   console.log("SignupPage location.state:", location.state);
-//   if (location.state?.showLogoutPopup) {
-//     setShowPopup(true);
+  const [activeForm, setActiveForm] = useState("signup");
 
-//     const timer = setTimeout(() => setShowPopup(false), 3000);
-//     return () => clearTimeout(timer);
-//   }
-// }, [location]);
+  // Only triggered when user clicks "Already a User?" inside SignupFormDemo
+  const handleAlreadyUserClick = () => {
+    setActiveForm("login");
+  };
+  const handleNewUserClick = () => {
+    setActiveForm("signup");
+  };
 
   return (
     <div className="min-h-screen w-full flex justify-between items-center px-8 relative">
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <DarkVeil
           hueShift={40}
@@ -32,22 +31,33 @@ export default function SignupPage() {
           resolutionScale={1}
         />
       </div>
-      {/* {showPopup && (
-        <MessagePopup
-          text="You have successfully logged out!"
-          onClose={() => setShowPopup(false)}
-        />
-      )} */}
 
-      {/* Left side: 3D Lanyard Canvas */}
+      {/* Left side: 3D Lanyard */}
       <div className="flex-1 flex justify-center items-center relative z-10">
         <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
       </div>
 
-      {/* Right side: Signup Form */}
-      <div className="flex-1 flex justify-center items-center relative z-10">
-        <SignupFormDemo />
+      {/* Right side: Forms */}
+      <div className="flex-1 flex justify-center items-start relative z-10 space-y-[-200px]">
+        {/* Signup Form */}
+        <div
+          className={`w-full max-w-md rounded-xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer ${
+            activeForm === "signup" ? "z-20 scale-100 blur-0" : "z-10 scale-95 blur-sm"
+          }`}
+        >
+          <SignupFormDemo onAlreadyUserClick={handleAlreadyUserClick} />
+        </div>
+
+        {/* Login Form peeking */}
+        <div
+          className={`w-full max-w-md rounded-xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer -translate-x-40 ${
+            activeForm === "login" ? "z-20 scale-100 blur-0" : "z-10 scale-95 blur-sm"
+          }`}
+        >
+          <LoginFormDemo onNewUserClick={handleNewUserClick}/>
+        </div>
       </div>
     </div>
-  )
+  );
 }
+

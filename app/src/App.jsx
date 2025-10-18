@@ -32,7 +32,7 @@ export default function App() {
         <Route path="/" element={<ProtectedRoute><LoadingWrapper><Home /></LoadingWrapper></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><LoadingWrapper><Settings/></LoadingWrapper></ProtectedRoute>} />
         <Route path="/Datasets" element={<ProtectedRoute><LoadingWrapper><Datasets/></LoadingWrapper></ProtectedRoute>} />
-        <Route path="/About" element={<ProtectedRoute><LoadingWrapper><About/></LoadingWrapper></ProtectedRoute>} />
+        <Route path="/About" element={<ProtectedRoute><About/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

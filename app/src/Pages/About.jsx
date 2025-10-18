@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar"
 import GradientText from "@/components/GradientText"
 import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin } from "lucide-react"
+import DarkVeil from "@/components/DarkVeil"
 
 const team = [
   {
@@ -76,13 +77,25 @@ export default function About() {
           rotation={1}
         />
       </div> */}
+      <div className="fixed inset-0 z-0">
+              <DarkVeil
+                hueShift={40}
+                noiseIntensity={0.05}
+                scanlineIntensity={0.2}
+                scanlineFrequency={5}
+                warpAmount={0.1}
+                speed={0.5}
+                resolutionScale={1}
+              />
+              
+            </div>
 
       {/* Main Content */}
       <main className="relative z-10 px-4 pt-24 sm:pt-32 pb-12">
         <section className="max-w-7xl mx-auto rounded-lg border border-gray-800 bg-transparent backdrop-blur-sm p-6 md:p-10">
           <div className="mb-8 text-center">
             <GradientText
-              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+              colors={["white", "#4079ff", "#40ffaa", "#4079ff", "cyan"]}
               animationSpeed={3}
               showBorder={false}
               className="custom-class sm:text-6xl font-bold"

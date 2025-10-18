@@ -3,6 +3,7 @@ import Beams from '../components/ui/Beams';
 import Navbar from "@/components/Navbar";
 import DatasetExplorer from "@/components/DataSetExplorer";
 import Papa from "papaparse";
+import DarkVeil from "@/components/DarkVeil";
 
 export default function Datasets() {
   const [csvData, setCsvData] = useState(null);
@@ -34,7 +35,7 @@ export default function Datasets() {
       <Navbar className="relative z-20" />
 
       {/* Background Beams */}
-      <div
+      {/* <div
         style={{
           position: 'fixed',
           top: 0,
@@ -56,7 +57,19 @@ export default function Datasets() {
           scale={0.2}
           rotation={0}
         />
-      </div>
+      </div> */}
+       <div className="fixed inset-0 z-0">
+              <DarkVeil
+                hueShift={40}
+                noiseIntensity={0.05}
+                scanlineIntensity={0.2}
+                scanlineFrequency={5}
+                warpAmount={0.1}
+                speed={0.5}
+                resolutionScale={1}
+              />
+              
+            </div>
 
       {/* Page Header */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-24 sm:pt-32">
