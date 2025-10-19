@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../../config/firebase.js"
 import  NewChatButton from "../components/plus.jsx"
+import { Navigate } from "react-router-dom"
 
 export default function Chat() {
 
@@ -36,7 +37,7 @@ export default function Chat() {
   if (loading) return <div>Loading auth...</div>
   if (error) return <div>Authentication error: {error.message}</div>
  if (!chatId) return <div>No chat ID in route.</div>
-if (!user?.email) return <div>Please log in to chat.</div>
+ if (!user?.email) return  <Navigate to="/signup" replace />;
 
  
   return (

@@ -5,6 +5,8 @@ import LoginFormDemo from "../components/login"
 import Lanyard from "../components/Lanyard"
 import DarkVeil from "../components/DarkVeil"
 import { useState } from "react"
+import GreekGod from "@/components/hammer"
+import ModelViewer from "@/components/ui/ModelViewer"
 
 export default function SignupPage() {
   const [activeForm, setActiveForm] = useState("signup");
@@ -34,7 +36,20 @@ export default function SignupPage() {
 
       {/* Left side: 3D Lanyard */}
       <div className="flex-1 flex justify-center items-center relative z-10">
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+       
+      <ModelViewer
+        url="/judge_gavel.glb"
+        width={600}
+        height={600}
+        defaultZoom={10} // Increase this value
+        minZoomDistance={1}
+        maxZoomDistance={10}
+        autoRotate={true}        // This enables auto-rotate
+        autoRotateSpeed={0.5}
+      />
+              
+      
+    
       </div>
 
       {/* Right side: Forms */}

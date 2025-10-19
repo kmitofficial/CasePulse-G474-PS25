@@ -8,8 +8,10 @@ import Chat from "./pages/Chat";
 import LoadingWrapper from "./components/LoadWrapper";
 import { v4 as uuidv4 } from "uuid";
 import ConversationList from "./components/ConversationList"
+import LadyJusticeSTLPage from "./components/hammer";
 
 import Datasets from "./pages/Datasets"
+import ProfilePage from "./pages/Profile";
 
 // Redirects /chat to /chat/:uuid
 function ChatRedirect() {
@@ -25,13 +27,14 @@ export default function App() {
         <Route path="/signup" element={<LoadingWrapper><SignupFormDemo/></LoadingWrapper>} />
         {/* Chat Page "entry" redirects to chat/:chatId */}
         <Route path="/chat" element={<LoadingWrapper><ChatRedirect /></LoadingWrapper>} />
-        <Route path="/s" element={<ConversationList/>} />
+        <Route path="/s" element={<LadyJusticeSTLPage/>} />
         {/* Chat Page with chatId */}
         <Route path="/chat/:chatId" element={<LoadingWrapper><Chat /></LoadingWrapper>} />
         {/* Home Page */}
         <Route path="/" element={<ProtectedRoute><LoadingWrapper><Home /></LoadingWrapper></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><LoadingWrapper><Settings/></LoadingWrapper></ProtectedRoute>} />
         <Route path="/Datasets" element={<ProtectedRoute><LoadingWrapper><Datasets/></LoadingWrapper></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><LoadingWrapper><ProfilePage/></LoadingWrapper></ProtectedRoute>} />
         <Route path="/About" element={<ProtectedRoute><About/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
