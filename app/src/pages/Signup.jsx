@@ -38,15 +38,15 @@ export default function SignupPage() {
       <div className="flex-1 flex justify-center items-center relative z-10">
        
       <ModelViewer
-        url="/judge_gavel.glb"
-        width={600}
-        height={600}
-        defaultZoom={10} // Increase this value
-        minZoomDistance={1}
-        maxZoomDistance={10}
-        autoRotate={true}        // This enables auto-rotate
-        autoRotateSpeed={0.5}
-      />
+  url="/judge_gavel.glb"
+  width={600}
+  height={600}
+  defaultZoom={1.5}  // Changed from 0.5 to 2
+  minZoomDistance={1}
+  maxZoomDistance={10}
+  autoRotate={true}
+  autoRotateSpeed={0.5}
+/>
               
       
     

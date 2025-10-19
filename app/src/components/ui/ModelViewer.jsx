@@ -85,34 +85,66 @@ const ModelInner = ({
   }, [url, ext]);
 
   const pivotW = useRef(new THREE.Vector3());
+  const isInitialized = useRef(false);
+  
   useLayoutEffect(() => {
-    if (!content) return;
+    if (!content || !inner.current || !outer.current) return;
+    
+    // Prevent re-initialization
+    if (isInitialized.current) return;
+    
     const g = inner.current;
-    g.updateWorldMatrix(true, true);
+    const o = outer.current;
+    
+    // Force geometry computation
+    content.traverse(obj => {
+      if (obj.isMesh && obj.geometry) {
+        if (!obj.geometry.boundingBox) {
+          obj.geometry.computeBoundingBox();
+        }
+        if (!obj.geometry.boundingSphere) {
+          obj.geometry.computeBoundingSphere();
+        }
+      }
+    });
+    
+    // Update matrices
+    g.updateMatrixWorld(true);
 
-    const sphere = new THREE.Box3().setFromObject(g).getBoundingSphere(new THREE.Sphere());
-    const s = 1 / (sphere.radius * 2);
-    g.position.set(-sphere.center.x, -sphere.center.y, -sphere.center.z);
+    // Calculate bounding box with forced update
+    const box = new THREE.Box3().setFromObject(g);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    
+    // Use max dimension for consistent scaling
+    const maxDim = Math.max(size.x, size.y, size.z);
+    
+    // Fixed scale - adjust this value to control size (higher = smaller model)
+    const s = 1 / maxDim;
+    
     g.scale.setScalar(s);
+    g.position.set(-center.x * s, -center.y * s, -center.z * s);
 
-    g.traverse(o => {
-      if (o.isMesh) {
-        o.castShadow = true;
-        o.receiveShadow = true;
+    g.traverse(obj => {
+      if (obj.isMesh) {
+        obj.castShadow = true;
+        obj.receiveShadow = true;
         if (fadeIn) {
-          o.material.transparent = true;
-          o.material.opacity = 0;
+          obj.material.transparent = true;
+          obj.material.opacity = 0;
         }
       }
     });
 
+    // Update world matrix after scaling
+    g.updateMatrixWorld(true);
     g.getWorldPosition(pivotW.current);
     pivot.copy(pivotW.current);
-    outer.current.rotation.set(initPitch, initYaw, 0);
+    o.rotation.set(initPitch, initYaw, 0);
 
     if (autoFrame && camera.isPerspectiveCamera) {
       const persp = camera;
-      const fitR = sphere.radius * s;
+      const fitR = 0.5; // Fixed fit radius
       const d = (fitR * 1.2) / Math.sin((persp.fov * Math.PI) / 180 / 2);
       persp.position.set(pivotW.current.x, pivotW.current.y, pivotW.current.z + d);
       persp.near = d / 10;
@@ -120,13 +152,17 @@ const ModelInner = ({
       persp.updateProjectionMatrix();
     }
 
+    // Mark as initialized
+    isInitialized.current = true;
+    invalidate();
+
     if (fadeIn) {
       let t = 0;
       const id = setInterval(() => {
         t += 0.05;
         const v = Math.min(t, 1);
-        g.traverse(o => {
-          if (o.isMesh) o.material.opacity = v;
+        g.traverse(obj => {
+          if (obj.isMesh) obj.material.opacity = v;
         });
         invalidate();
         if (v === 1) {
@@ -135,7 +171,9 @@ const ModelInner = ({
         }
       }, 16);
       return () => clearInterval(id);
-    } else onLoaded?.();
+    } else {
+      onLoaded?.();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
@@ -333,7 +371,7 @@ const ModelViewer = ({
   modelYOffset = 0,
   defaultRotationX = -50,
   defaultRotationY = 20,
-  defaultZoom = 0.5,
+  defaultZoom = 2,
   minZoomDistance = 0.5,
   maxZoomDistance = 10,
   enableMouseParallax = true,
@@ -399,19 +437,14 @@ const ModelViewer = ({
       }}
       className="relative"
     >
-      {/* {showScreenshotButton && (
-        <button
-          onClick={capture}
-          className="absolute top-4 right-4 z-10 cursor-pointer px-4 py-2 border border-white rounded-xl bg-transparent text-white hover:bg-white hover:text-black transition-colors"
-        >
-          Take Screenshot
-        </button>
-      )} */}
-
       <Canvas
         shadows
         frameloop="demand"
-        gl={{ preserveDrawingBuffer: true }}
+        dpr={[1, 2]}
+        gl={{ 
+          preserveDrawingBuffer: true,
+          antialias: true
+        }}
         onCreated={({ gl, scene, camera }) => {
           rendererRef.current = gl;
           sceneRef.current = scene;

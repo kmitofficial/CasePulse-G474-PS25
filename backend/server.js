@@ -1,31 +1,26 @@
 import express from "express";
-import path from "path";
 import cors from "cors";
-import { fileURLToPath } from "url";
 import chatRoute from "./routes/chatRoute.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());               // Allow frontend calls
-app.use(express.json()); 
+// Allow frontend calls
+app.use(cors({
+  origin: "https://casebridge-app.vercel.app/", // replace with your Vercel URL
+  credentials: true
+}));
 
-app.use("/", chatRoute);
+app.use(express.json());
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "../app/dist")));
+// Your API routes
+app.use("/api", chatRoute);
 
-// Fallback: send index.html for any other route
+// 404 handler (optional)
 app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, "../app/dist", "index.html"));
+  res.status(404).json({ message: "Route not found" });
 });
 
-
-
-
 app.listen(PORT, () => {
-  console.log(`App running at http://localhost:${PORT}`);
+  console.log(`Backend running at http://localhost:${PORT}`);
 });
