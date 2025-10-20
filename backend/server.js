@@ -11,11 +11,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: "*", // Or replace with frontend URL for more security
+  origin: "*", // for production, replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-}));
-app.options("/*", cors());             // Allow frontend calls
+}));            // Allow frontend calls
 app.use(express.json()); 
 
 app.use("/", chatRoute);
@@ -25,8 +24,8 @@ app.use("/", chatRoute);
 app.use(express.static(path.join(__dirname, "../app/dist")));
 
 // Fallback: send index.html for any other route
-app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, "../app/dist", "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../app/dist", "index.html"));
 });
 
 
