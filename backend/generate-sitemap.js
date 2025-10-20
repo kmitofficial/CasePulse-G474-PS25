@@ -5,7 +5,7 @@ const path = require('path');
 const sitemap = new SitemapStream({ hostname: 'https://casebridge-app.vercel.app' });
 
 // List all your pages here
-const pages = ['/', '/About', '/profile','/Datasets','/chat','/signup','/chat/:chatId'];
+const pages = ['/', '/about', '/profile','/datasets','/chat','/signup',];
 
 (async () => {
   for (const page of pages) {

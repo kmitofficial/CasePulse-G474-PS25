@@ -33,9 +33,9 @@ export default function App() {
         {/* Home Page */}
         <Route path="/" element={<ProtectedRoute><LoadingWrapper><Home /></LoadingWrapper></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><LoadingWrapper><Settings/></LoadingWrapper></ProtectedRoute>} />
-        <Route path="/Datasets" element={<ProtectedRoute><LoadingWrapper><Datasets/></LoadingWrapper></ProtectedRoute>} />
+        <Route path="/datasets" element={<ProtectedRoute><LoadingWrapper><Datasets/></LoadingWrapper></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><LoadingWrapper><ProfilePage/></LoadingWrapper></ProtectedRoute>} />
-        <Route path="/About" element={<ProtectedRoute><About/></ProtectedRoute>} />
+        <Route path="/about" element={<ProtectedRoute><About/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

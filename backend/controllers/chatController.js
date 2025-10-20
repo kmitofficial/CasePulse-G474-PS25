@@ -12,7 +12,7 @@ export const handleChat = async (req, res) => {
     }
 
     // Call FastAPI backend once
-    const response = await fetch("http://127.0.0.1:8000/submit_query", {
+    const response = await fetch("https://unsupernaturally-metaphrastic-tijuana.ngrok-free.dev/submit_query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
