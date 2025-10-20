@@ -14,22 +14,19 @@ app.use(cors({
   origin: "*", // for production, replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-}));            // Allow frontend calls
+}));
 app.use(express.json()); 
 
 app.use("/", chatRoute);
-
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "../app/dist")));
 
 // Fallback: send index.html for any other route
-app.get("*", (req, res) => {
+// Changed from "*" to /.*/ (regex)
+app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../app/dist", "index.html"));
 });
-
-
-
 
 app.listen(PORT, () => {
   console.log(`App running at http://localhost:${PORT}`);
