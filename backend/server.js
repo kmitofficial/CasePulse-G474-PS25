@@ -15,7 +15,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
-app.options("*", cors());             // Allow frontend calls
+app.options("/*", cors());             // Allow frontend calls
 app.use(express.json()); 
 
 app.use("/", chatRoute);
