@@ -1,5 +1,5 @@
 import express from "express";
-import { handleChat, getFusedFiles } from "../controllers/chatController.js";
+import { handleChat} from "../controllers/chatController.js";
 
 const router = express.Router();
 
@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/submit_query", handleChat);
 
 //  Retrieve fused files later by query_id
-router.get("/fused_files/:query_id", getFusedFiles);
+//router.get("/fused_files/:query_id", getFusedFiles);
 
 export default router;

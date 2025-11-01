@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import SignupFormDemo from "./Pages/Signup";
+import SignupFormDemo from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Home from "./Pages/Home.jsx";
-import About from "./Pages/About";
-import Chat from "./Pages/Chat";
+import Home from "./pages/Home.jsx";
+import About from "./pages/About";
+import Chat from "./pages/Chat";
 import { v4 as uuidv4 } from "uuid";
+import LoadingWrapper from "./components/LoadWrapper";
 
-import Datasets from "./Pages/Datasets"
-import ProfilePage from "./Pages/Profile";
+import Datasets from "./pages/Datasets"
+import ProfilePage from "./pages/Profile";
 
 // Redirects /chat to /chat/:uuid
 function ChatRedirect() {
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LoadingWrapper><Home /></LoadingWrapper>} />
         <Route path="/datasets" element={<Datasets/>} />
         
         <Route path="/signup" element={<SignupFormDemo/>} />
