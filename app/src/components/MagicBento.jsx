@@ -5,7 +5,6 @@ import AnimatedList from './AnimatedList'
 import { collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { History } from "lucide-react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';

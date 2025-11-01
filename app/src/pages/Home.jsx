@@ -5,8 +5,6 @@ import { CheckCircle, ArrowRight, Database, Code, FileText, ExternalLink } from 
 import BlurText from "@/components/BlurText";
 import GradientText from "@/components/GradientText";
 import TextType from "@/components/TextType";
-import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx";
-import ExpandableCardDemoGrid from "@/components/expandable-card-demo-grid";
 import "../../globals.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";

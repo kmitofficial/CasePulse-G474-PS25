@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Beams from '../components/ui/Beams';
 import Navbar from "@/components/Navbar";
 import DatasetExplorer from "@/components/DataSetExplorer";
 import Papa from "papaparse";

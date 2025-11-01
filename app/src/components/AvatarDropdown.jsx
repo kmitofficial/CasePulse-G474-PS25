@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
-import MessagePopup from "../components/Popup";
 
 export default function AvatarDropdown({ user }) {
   const [open, setOpen] = useState(false);

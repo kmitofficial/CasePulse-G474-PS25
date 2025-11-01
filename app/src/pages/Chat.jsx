@@ -1,9 +1,5 @@
 import ChatBox from "../components/ui/ChatBox.jsx"
 import AssistantBall from "../components/Sidebar.jsx"
-import FloatingDockDemo from "@/components/ui/FloatingDockDemo.jsx"
-// import LaserFlow from "../components/LaserFlow.jsx";
-import RotatingText from "../components/ui/RotatingText.jsx"
-//import ElasticSlider from "../components/ui/ElasticSlider.jsx"
 import DarkVeil from "../components/DarkVeil.jsx"
 import Navbar from "../components/Navbar-g.jsx"
 
@@ -11,20 +7,13 @@ import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../../config/firebase.js"
-import  NewChatButton from "../components/plus.jsx"
 import { Navigate } from "react-router-dom"
 
 export default function Chat() {
 
   const [isUS, setIsUS] = useState(true); // false = Indian, true = US
   const [selectedSearchMethod, setSelectedSearchMethod] = useState("bm25");
-
-  
-  const items = [
-    "Item 1","Item 2","Item 3","Item 4","Item 5",
-    "Item 6","Item 7","Item 8","Item 9","Item 10"
-  ]
-   const { chatId } = useParams()
+  const { chatId } = useParams()
   const [user, loading, error] = useAuthState(auth)
     useEffect(() => {
     console.log("isUS changed:", isUS);

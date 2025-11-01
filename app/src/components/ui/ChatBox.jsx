@@ -4,8 +4,7 @@ import { useState, useEffect } from "react"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../../config/firebase"
 import ChatDisplay from "../Conversation"
-import RotatingText from "./RotatingText"
-import NewChatButton from "../plus"  // ✅ your button
+import NewChatButton from "../plus"
 
 export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod }) {
   const [messages, setMessages] = useState([])

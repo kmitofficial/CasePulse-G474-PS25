@@ -40,7 +40,7 @@ export default function LoginFormDemo({ onNewUserClick }) {
 
   return (
     <div className="flex justify-end items-center px-8 h-auto w-auto">
-      <div className="shadow-input w-full max-w-sm rounded-2xl p-6 border border-gray-700 bg-transparent">
+      <div className="w-full max-w-sm rounded-2xl p-6 border border-gray-700 bg-transparent">
         <h2 className="text-xl text-white font-semibold mb-2 font-sans">Welcome Back</h2>
         <p className="mb-6 text-sm text-gray-200">
           Log in to continue to Case Bridge

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase"; // adjust path
-import Avatar from "../components/Avatar"
 import AvatarDropdown from "../components/AvatarDropdown"; 
 
 export default function Navbar() {

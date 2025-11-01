@@ -1,5 +1,4 @@
 import React from "react"
-import Beams from "../components/ui/Beams"
 import Navbar from "@/components/Navbar"
 import GradientText from "@/components/GradientText"
 import { Card, CardContent } from "@/components/ui/card"

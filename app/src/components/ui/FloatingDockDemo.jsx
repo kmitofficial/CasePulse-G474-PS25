@@ -5,7 +5,6 @@ import {
   IconSettings,
   IconLogin2,
   IconHome,
-  IconNewSection,
   IconInfoCircle,
   IconHistory
 } from "@tabler/icons-react";
