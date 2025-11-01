@@ -1,5 +1,5 @@
 // Conversation.jsx
-"use client"
+"use client";
 import { useEffect, useRef } from "react";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase"; // Adjust as needed
@@ -9,30 +9,67 @@ export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) 
   const messagesEndRef = useRef(null);
   const containerRef = useRef(null);
 
+  // === Auto-scroll to bottom ===
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
- useEffect(() => {
-  if (!userEmail || !chatId || !messages?.length) return;
+  // === Save conversation in Firestore ===
+  useEffect(() => {
+    if (!userEmail || !chatId || !messages?.length) return;
 
-  // Get the first user message as the title
-  const firstUserMessage = messages.find(msg => msg.role === "user");
-  const title = firstUserMessage
-    ? firstUserMessage.content.slice(0, 40) // first 40 chars as title
-    : "Untitled";
+    const firstUserMessage = messages.find((msg) => msg.role === "user");
+    const title = firstUserMessage
+      ? firstUserMessage.content.slice(0, 40)
+      : "Untitled";
 
-  setDoc(
-    doc(db, "chats", userEmail, "conversations", chatId),
-    {
-      messages,
-      title,                    // Add title field
-      updatedAt: Date.now(),
-    },
-    { merge: true }
-  ).catch((e) => console.error("Error saving chat:", e));
-}, [userEmail, chatId, messages]);
+    setDoc(
+      doc(db, "chats", userEmail, "conversations", chatId),
+      {
+        messages,
+        title,
+        updatedAt: Date.now(),
+      },
+      { merge: true }
+    ).catch((e) => console.error("Error saving chat:", e));
+  }, [userEmail, chatId, messages]);
 
+  // === Message formatter (regex-based) ===
+  function formatMessageContent(content) {
+    if (!content) return "";
+
+    // Highlight section titles like "Query:", "Conclusion:", etc.
+    content = content.replace(
+      /(\b(Query|Conclusion|Relevant Legal Principles|Authorized Sending Parties|Unauthorized Sending Parties|Calculation of Fees)\b:)/gi,
+      "<strong class='text-cyan-400'>$1</strong>"
+    );
+
+    // Highlight numbered points like "1. ", "2. "
+    content = content.replace(
+      /(^|\n)(\d+\.\s+)/g,
+      "<br/><span class='text-cyan-300 font-semibold'>$2</span>"
+    );
+
+    // Highlight retrieved JSONL file info
+    content = content.replace(
+      /Retrieved JSONL file content from job (\w+):/g,
+      "<br/><strong class='text-amber-400'>📄 Retrieved file (job ID: $1)</strong><br/>"
+    );
+
+    // Highlight JSON objects for readability
+    content = content.replace(
+      /({.*?})/gs,
+      "<code class='bg-gray-900 text-green-300 rounded p-1 block whitespace-pre-wrap'>$1</code>"
+    );
+
+    // Replace "---" with a clean divider
+    content = content.replace(/---+/g, "<hr class='border-gray-600 my-3'/>");
+
+    // Preserve line breaks
+    content = content.replace(/\n/g, "<br/>");
+
+    return content.trim();
+  }
 
   if (!messages || messages.length === 0) return null;
 
@@ -46,7 +83,9 @@ export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) 
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex ${
+              message.role === "user" ? "justify-end" : "justify-start"
+            }`}
           >
             <div
               className={`max-w-md lg:max-w-xl px-5 py-3.5 rounded-2xl backdrop-blur-md shadow-lg transition-all duration-300 ${
@@ -55,10 +94,16 @@ export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) 
                   : "bg-gray-800/80 text-gray-100 mr-auto border border-gray-700/50"
               }`}
             >
-              <p className="text-[15px] leading-relaxed break-words">{message.content}</p>
+              <p
+                className="text-[15px] leading-relaxed break-words"
+                dangerouslySetInnerHTML={{
+                  __html: formatMessageContent(message.content),
+                }}
+              />
             </div>
           </div>
         ))}
+
         {isLoading && (
           <div className="flex justify-start">
             <div className="max-w-md lg:max-w-xl px-5 py-3.5 rounded-2xl backdrop-blur-md shadow-lg bg-gradient-to-r from-cyan-600 to-cyan-400 text-gray-100 mr-auto border border-gray-700/50">
@@ -82,6 +127,7 @@ export default function ChatDisplay({ messages, isLoading, chatId, userEmail }) 
             </div>
           </div>
         )}
+
         <div ref={messagesEndRef} />
       </div>
     </div>

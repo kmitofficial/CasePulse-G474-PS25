@@ -4,6 +4,7 @@ import GradientText from "@/components/GradientText"
 import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin } from "lucide-react"
 import DarkVeil from "@/components/DarkVeil"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const team = [
   {
@@ -48,9 +49,13 @@ const contributors = ["Contributor A", "Contributor B", "Contributor C", "Contri
 export default function About() {
   return (
     <div className="relative min-h-screen bg-black text-white">
+                        
 
       {/* Navbar */}
       <Navbar className="relative z-20" />
+      
+
+
 
       {/* Background Beams */}
       {/* <div
@@ -93,6 +98,7 @@ export default function About() {
       <main className="relative z-10 px-4 pt-24 sm:pt-32 pb-12">
         <section className="max-w-7xl mx-auto rounded-lg border border-gray-800 bg-transparent backdrop-blur-sm p-6 md:p-10">
           <div className="mb-8 text-center">
+            
             <GradientText
               colors={["white", "#4079ff", "#40ffaa", "#4079ff", "cyan"]}
               animationSpeed={3}

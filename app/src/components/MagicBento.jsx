@@ -18,7 +18,7 @@ const cardData = [
     color: '#060010',
     title: 'Analytics',
     description: 'Summarize judgments & highlight key points',
-    label: 'Search Method'
+    label: 'dthrty'
   },
   {
     color: '#060010',
@@ -33,7 +33,7 @@ const cardData = [
   },
   {
     color: '#060010',
-    label: 'Top 5 Retrived Docs'
+    label: 'Search Method'
   },
   // {
   //   color: '#060010',
@@ -516,7 +516,7 @@ const MagicBento = ({
   // at the top of MagicBento
   // at the top of MagicBento
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10'];
-  const Rdocs = ['Doc 1', 'Doc 2', 'Doc 3', 'Doc 4', 'Doc 5'];
+  const Rdocs = [];
   const syntheticDocs = [
     { title: "Case_Analysis_1.pdf" },
     { title: "Contract_Template_2.docx" },
@@ -527,19 +527,6 @@ const MagicBento = ({
 
   const [docs, setDocs] = useState(syntheticDocs); // start with synthetic
 
-
-  useEffect(() => {
-    const fetchDocs = async () => {
-      try {
-        const res = await fetch("/api/fused_files"); // adjust endpoint
-        const data = await res.json();
-        setDocs(data.slice(0, 5)); // keep only 5
-      } catch (err) {
-        console.error("Error fetching docs:", err);
-      }
-    };
-    fetchDocs();
-  }, []);
   const [user] = useAuthState(auth);
   const [conversations, setConversations] = useState([]);
   const chatTitles = conversations
@@ -565,6 +552,39 @@ const MagicBento = ({
     }
     fetchTitles();
   }, [user]);
+
+
+useEffect(() => {
+  const fetchDocs = async () => {
+    try {
+      const res = await fetch("https://scarlett-uninsinuating-nonsyntonically.ngrok-free.app/latest_fused_files");
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server error:", res.status, text);
+        return;
+      }
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        console.error("Non-JSON response:", text);
+        return;
+      }
+
+      const data = await res.json();
+      setDocs(data.fused_files.slice(0, 5));
+    } catch (err) {
+      console.error("Fetch failed:", err);
+    }
+  };
+
+  fetchDocs();
+}, []);
+
+
+
+
 
   if (!user?.email) return <div>Not logged in!</div>;
 
@@ -772,7 +792,7 @@ const MagicBento = ({
                     ) : card.label === "Document Drafting" ? (
                       // Top 5 docs for Document Drafting
                       <div className="space-y-2 mt-2">
-                        <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3>
+                        {/* <h3 className="text-sm font-medium text-purple-300">Top 5 Docs</h3> */}
                         <ul className="text-xs space-y-1">
                           {docs.length > 0 ? (
                             docs.map((doc, i) => (
@@ -781,7 +801,7 @@ const MagicBento = ({
                               </li>
                             ))
                           ) : (
-                            <li className="text-gray-500 italic">Loading...</li>
+                            <li className="text-gray-500 italic">No Docs Found</li>
                           )}
                         </ul>
                       </div>
@@ -811,13 +831,14 @@ const MagicBento = ({
                         displayScrollbar={false}
                       />):
                       (
-                      <div className="text-gray-500 italic mt-2">No conversations yet</div>
+                      <div className="text-gray-500 italic mt-2">No Retrived Docs yet</div>
                     )
                   ) : card.label === "Search Method" ? (
   <div className="flex flex-col gap-4 px-2 py-1">
     {[
       { id: 'bm25', label: 'BM25', info: 'Lexical Search' },
-      { id: 'legalbert', label: 'LegalBERT', info: 'Semantic Search' },
+      { id: 'legalbert', label: 'LegalBERT', info: 'Semantic Search with legal context' },
+      { id: 'bert', label: 'BERT', info: 'Semantic Search' },
       { id: 'hybrid', label: 'Hybrid', info: 'Combines Both' },
     ].map((method) => (
       <div
@@ -825,7 +846,7 @@ const MagicBento = ({
         className="flex items-center justify-between cursor-pointer"
       >
         {/* Radio + Label */}
-        <label className="flex items-center gap-3 cursor-pointer text-white text-base">
+        <label className="flex items-center gap-3 cursor-pointer text-white [font-size:1.15rem]">
           <input
             type="radio"
             name="searchMethod"
