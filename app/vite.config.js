@@ -12,8 +12,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: './', // ✅ important for Vercel deployment
+  base: './', 
   build: {
-    outDir: 'dist', // default for Vite, ensures vercel.json points to correct folder
+    outDir: 'dist',
   },
 })

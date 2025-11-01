@@ -1,17 +1,12 @@
 "use client"
 import SignupFormDemo from "../components/signup-form-demo"
-import login from "../components/signup-form-demo"
 import LoginFormDemo from "../components/login"
-import Lanyard from "../components/Lanyard"
 import DarkVeil from "../components/DarkVeil"
 import { useState } from "react"
-import GreekGod from "@/components/hammer"
 import ModelViewer from "@/components/ui/ModelViewer"
 
 export default function SignupPage() {
   const [activeForm, setActiveForm] = useState("signup");
-
-  // Only triggered when user clicks "Already a User?" inside SignupFormDemo
   const handleAlreadyUserClick = () => {
     setActiveForm("login");
   };
@@ -37,17 +32,18 @@ export default function SignupPage() {
       {/* Left side: 3D Lanyard */}
       <div className="flex-1 flex justify-center items-center relative z-10">
        
-      <ModelViewer
-  url="/judge_gavel.glb"
-  width={600}
-  height={600}
-  defaultZoom={1.5}  // Changed from 0.5 to 2
-  minZoomDistance={1}
-  maxZoomDistance={10}
-  autoRotate={true}
-  autoRotateSpeed={0.5}
-/>
-              
+        <ModelViewer
+          url="/statue.glb"
+          width={600}
+          height={600}
+          defaultZoom={1.5}
+          defaultRotationX={40}
+          defaultRotationY={0}
+          minZoomDistance={1}
+          maxZoomDistance={10}
+          autoRotate={false}
+          autoRotateSpeed={0.5}
+        />
       
     
       </div>
