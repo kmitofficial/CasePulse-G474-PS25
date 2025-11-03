@@ -1,0 +1,44 @@
+python build.py \
+  --emb-glob "passage_embeds*.npy" \
+  --ids-glob  "passage_ids*.npy" \
+  --index-dir index2 \
+  --train-size 800000 \
+  --nlist 16384 \
+  --M 96 \
+  --nbits 8 \
+  --opq --opqM 96 \
+  --chunk 250000 \
+  --threads 12 \
+  --normalize
+
+python Inference.py \
+  --index index/ivfpq_full.faiss \
+  --model "jhu-clsp/LegalBERT-DPR-CLERC-ft" \
+  --query "criminal contract law" \
+  --topk 5 \
+  --nprobe 256 \
+  --normalize
+
+python evaluate.py \
+  --index index1/ivfpq_full.faiss \
+  --queries test.single-removed.direct.tsv \
+  --qrels qrels-doc.test.direct.tsv \
+  --pid2did mapping.pid2did.tsv \
+  --model jhu-clsp/LegalBERT-DPR-CLERC-ft \
+  --topk 1000 \
+  --nprobe 1024 \
+  --normalize
+
+python add.py \
+  --emb-glob "passage_embeds*.npy" \
+  --ids-glob "passage_ids*.npy" \
+  --trained-index index1/ivfpq_trained.faiss \
+  --out-index index1/ivfpq_full.faiss \
+  --normalize
+
+
+
+
+
+
+
