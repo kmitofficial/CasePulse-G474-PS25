@@ -8,6 +8,7 @@ import TextType from "@/components/TextType";
 import "../../globals.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import VideoDemo from "@/components/VideoDemo";
 
 const headlines = [
   "Smarter Legal Research, Instantly",
@@ -154,6 +155,29 @@ export default function Home() {
           />
         </div>
       </section>
+      {/* Demo Video Section */}
+<section className="py-16 px-4 sm:px-4 lg:px-6 relative z-10">
+  <div className="max-w-6xl mx-auto">
+    <div className="text-center mb-12">
+      <GradientText
+        colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+        animationSpeed={3}
+        showBorder={false}
+        className="custom-class sm:text-5xl font-semibold mb-6"
+      >See It In Action</GradientText>
+      <p className="text-lg text-muted-foreground">
+        Experience the power of CaseBridge firsthand
+      </p>
+    </div>
+    
+    <VideoDemo 
+      videoUrl="/assests/demo.mp4"
+      thumbnail="/path/to/thumbnail.jpg"
+      title="Platform Walkthrough"
+      description="Watch how CaseBridge revolutionizes legal research with AI"
+    />
+  </div>
+</section>
 
       {/* Achievements Section */}
       <section className="py-16 px-4 sm:px-4 lg:px-6 relative z-10">
