@@ -1,0 +1,28 @@
+.button {
+  /* Remove fixed positioning */
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background: #00bcd4;
+  color: #fff;
+  font-size: 32px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  transition:
+    background 0.2s cubic-bezier(.6,0,.5,1),
+    color 0.2s cubic-bezier(.6,0,.5,1),
+    transform 0.2s cubic-bezier(.6,0,.5,1);
+}
+
+.button:hover {
+  background: #fff;
+  color: #00bcd4;
+  transform: scale(1.13);
+}
