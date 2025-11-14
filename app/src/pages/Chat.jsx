@@ -12,6 +12,7 @@ import { Navigate } from "react-router-dom"
 export default function Chat() {
 
   const [isUS, setIsUS] = useState(true); // false = Indian, true = US
+  const [selectedModel,setSelectedModel]=useState("llama");
   const [selectedSearchMethod, setSelectedSearchMethod] = useState("bm25");
   const { chatId } = useParams()
   const [user, loading, error] = useAuthState(auth)
@@ -49,7 +50,11 @@ export default function Chat() {
       <AssistantBall isUS={isUS}
         setIsUS={setIsUS}
         selectedSearchMethod={selectedSearchMethod}
-        setSelectedSearchMethod={setSelectedSearchMethod}/>
+        setSelectedSearchMethod={setSelectedSearchMethod}
+        selectedModel={selectedModel}
+        setSelectedModel={setSelectedModel}
+
+        />
 
       <ChatBox
         key={chatId}
@@ -62,6 +67,8 @@ export default function Chat() {
         userEmail={user.email}
         isUS={isUS}
         selectedSearchMethod={selectedSearchMethod}
+        selectedModel={selectedModel}    
+
       />
       
 

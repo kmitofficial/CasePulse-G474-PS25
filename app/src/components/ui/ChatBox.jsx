@@ -6,7 +6,7 @@ import { db } from "../../../config/firebase"
 import ChatDisplay from "../Conversation"
 import NewChatButton from "../plus"
 
-export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod }) {
+export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod, selectedModel }) {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -55,7 +55,9 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod 
       console.log({
   query: input,
   jurisdiction: isUS ? "US" : "IN",
-  retrieval_model: selectedSearchMethod
+  retrieval_model: selectedSearchMethod,
+  GenerationLLm:selectedModel,
+
 });
 
       const res = await fetch("https://casepulse-g474-ps25.onrender.com/submit_query", {
@@ -65,6 +67,7 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod 
         query: input,
         jurisdiction: isUS ? "US" : "IN",         // send jurisdiction
         retrieval_model: selectedSearchMethod,   // send retrieval model
+        GenerationLLm:selectedModel,
       }),
       })
       if (!res.ok) throw new Error("API not found")

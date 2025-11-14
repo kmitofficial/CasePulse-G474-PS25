@@ -24,6 +24,7 @@ export const handleChat = async (req, res) => {
           query,
           jurisdiction: req.body.jurisdiction || "US",
           retrieval_model: req.body.retrieval_model || "bm25",
+          geneartion_llm:req.body.GenerationLLm || "llama"
         }),
       }
     );

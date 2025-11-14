@@ -28,7 +28,7 @@ const cardData = [
     color: "#060010",
     title: "Analytics",
     description: "Summarize judgments & highlight key points",
-    label: "model",
+    label: "Generation LLM",
   },
   {
     color: "#060010",
@@ -544,13 +544,15 @@ const MagicBento = ({
   // ✅ lifted state from parent
   isUS,
   setIsUS,
+  selectedModel,
+  setSelectedModel,
   selectedSearchMethod,
   setSelectedSearchMethod,
 }) => {
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
-  const [selectedModel,setSelectedModel]=useState("llama");
+
 
 
   // at the top of MagicBento
@@ -894,7 +896,7 @@ const MagicBento = ({
                         <div className="text-gray-500 italic mt-2">
                           No Retrived Docs yet
                         </div>
-                      )) : card.label==="model"?(
+                      )) : card.label==="Generation LLM"?(
   <div className="flex flex-col gap-4 px-2 py-1">
     {[
       {id:"llama",label:"Llama"},

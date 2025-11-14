@@ -7,7 +7,7 @@ import { HiOutlineSparkles } from "react-icons/hi" // example icon
 export default function AssistantBall({ isUS,
   setIsUS,
   selectedSearchMethod,
-  setSelectedSearchMethod}) {
+  setSelectedSearchMethod,selectedModel,setSelectedModel}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [position, setPosition] = useState({ x: 24, y: 24 })
@@ -125,6 +125,8 @@ export default function AssistantBall({ isUS,
             setIsUS={setIsUS}
             selectedSearchMethod={selectedSearchMethod}
             setSelectedSearchMethod={setSelectedSearchMethod}
+            selectedModel={selectedModel}
+            setSelectedModel={setSelectedModel}
       />
         </div>
       )}
