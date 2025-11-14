@@ -61,7 +61,7 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
 });
 //https://casepulse-g474-ps25.onrender.com/submit_query
 
-      const res = await fetch("https://casepulse-g474-ps25.onrender.com/submit_query", {
+      const res = await fetch("http://localhost:5000/submit_query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

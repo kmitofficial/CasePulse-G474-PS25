@@ -37,7 +37,10 @@ export const handleChat = async (req, res) => {
     const data = await response.json();
     console.log("[DEBUG] FastAPI response data:", data);
 
-    let llmResponse = data.llm_generated?.legal_brief || "No legal brief generated";
+    //let llmResponse = data.llm_generated?.legal_brief || "No legal brief generated";
+    let llmResponse = data.llm_generated?.legal_brief?.brief_text || "No legal brief generated";
+console.log("[DEBUG] LLM response extracted:", llmResponse.substring(0, 200), "...");
+
     console.log("[DEBUG] LLM response extracted:", llmResponse.substring(0, 200), "...");
 
     const fusedFiles = data.fused_files || [];
