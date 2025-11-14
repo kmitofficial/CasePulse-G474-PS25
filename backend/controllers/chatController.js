@@ -12,6 +12,7 @@ export const handleChat = async (req, res) => {
       console.log("[DEBUG] No query provided");
       return res.status(400).json({ error: "Query is required" });
     }
+    //https://unsupernaturally-metaphrastic-tijuana.ngrok-free.dev/submit_query
 
     // Call FastAPI backend
     console.log("[DEBUG] Sending query to FastAPI...");
@@ -24,7 +25,7 @@ export const handleChat = async (req, res) => {
           query,
           jurisdiction: req.body.jurisdiction || "US",
           retrieval_model: req.body.retrieval_model || "bm25",
-          geneartion_llm:req.body.GenerationLLm || "llama"
+          generation_llm: req.body.generation_llm || "llama" // ✅ fixed typo
         }),
       }
     );

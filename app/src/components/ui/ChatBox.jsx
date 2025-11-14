@@ -56,9 +56,10 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
   query: input,
   jurisdiction: isUS ? "US" : "IN",
   retrieval_model: selectedSearchMethod,
-  GenerationLLm:selectedModel,
+  generation_llm:selectedModel,
 
 });
+//https://casepulse-g474-ps25.onrender.com/submit_query
 
       const res = await fetch("https://casepulse-g474-ps25.onrender.com/submit_query", {
         method: "POST",
@@ -67,7 +68,7 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
         query: input,
         jurisdiction: isUS ? "US" : "IN",         // send jurisdiction
         retrieval_model: selectedSearchMethod,   // send retrieval model
-        GenerationLLm:selectedModel,
+         generation_llm: selectedModel,
       }),
       })
       if (!res.ok) throw new Error("API not found")
