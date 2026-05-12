@@ -11,9 +11,13 @@
     "test:e2e": "npx playwright test"
   },
   "dependencies": {
+    "@google/genai": "^2.1.0",
+    "@google/generative-ai": "^0.24.1",
     "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
     "express": "^5.1.0",
     "node-fetch": "^3.3.2",
+    "openai": "^6.37.0",
     "sitemap": "^8.0.0"
   },
   "devDependencies": {
