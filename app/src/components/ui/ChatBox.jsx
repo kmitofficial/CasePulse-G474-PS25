@@ -61,7 +61,7 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
 });
 //https://casepulse-g474-ps25.onrender.com/submit_query
 
-      const res = await fetch("https://casepulse-g474-ps25.onrender.com/submit_query", {
+      const res = await fetch("http://localhost:5000/submit_query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -100,15 +100,19 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
   return (
 
     <>
-    <div className="h-screen" style={{ background: "#000000" }}></div>
+    {/* <div className="h-screen" style={{ background: "#000000" }}></div> */}
+    return (
+  <div className="flex flex-col min-h-screen relative z-10">
 
+       <div className="pb-32 pt-20 overflow-y-auto">
       <ChatDisplay
         messages={messages}
         isLoading={isLoading}
         chatId={chatId}
         userEmail={userEmail}
       />
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-full max-w-2xl px-4">
+    </div>
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-full max-w-2xl px-4 z-[9999]">
   <div className="flex items-center gap-3">
     {/* New Chat Button - separate from input */}
     <div className="flex-shrink-0">
@@ -157,6 +161,8 @@ export default function ChatBox({ chatId, userEmail, isUS, selectedSearchMethod,
           display: none;
         }
       `}</style>
+      </div>
     </>
+    
   )
 }
