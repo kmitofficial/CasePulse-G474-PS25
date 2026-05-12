@@ -47,9 +47,9 @@ export default function SignupFormDemo({ onAlreadyUserClick }) {
   return (
     <div className="flex justify-end items-center px-8 h-auto w-auto mb-50">
       <div className=" w-full max-w-sm rounded-2xl p-6  bg-transparent">
-        <h2 className="text-xl text-white font-semibold mb-2 font-sans">Welcome to Case Bridge</h2>
+        <h2 className="text-xl text-white font-semibold mb-2 font-sans">Welcome to Case Pulse</h2>
         <p className="mb-6 text-sm text-gray-200">
-          Join Case Bridge to access advanced legal research tools
+          Join Case Pulse to access advanced legal research tools
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

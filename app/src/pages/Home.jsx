@@ -18,7 +18,7 @@ const headlines = [
   "Justice, Accelerated by Innovation",
 ];
 
-const about = "Case Bridge is an intelligent legal research and analysis tool designed to help law students, researchers, and professionals quickly access and understand U.S.federal court cases. By combining advanced retrieval techniques with AI-powered summarization, it provides concise, reliable case briefs, saving time while improving accuracy in legal research.";
+const about = "Case Pulse is an intelligent legal research and analysis tool designed to help law students, researchers, and professionals quickly access and understand U.S.federal court cases. By combining advanced retrieval techniques with AI-powered summarization, it provides concise, reliable case briefs, saving time while improving accuracy in legal research.";
 
 const achievements = [
   {
@@ -58,7 +58,7 @@ const achievements = [
     id: 4,
     title: "CasePulse GitHub Repository",
     category: "Open Source",
-    description: "Complete source code and documentation for the CaseBridge legal research platform.",
+    description: "Complete source code and documentation for the Case Pulse legal research platform.",
     icon: <Code className="w-6 h-6" />,
     link: "https://github.com/kmitofficial/CasePulse-G474-PS25.git",
     platform: "GitHub",
@@ -110,7 +110,7 @@ export default function Home() {
             className="sm:text-7xl font-semibold mb-6 p-4 text-white"
           />
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 p-2">
-            CaseBridge uses Dense Retrieval + BM25 Hybrid Search for state-of-the-art case law retrieval
+            Case Pulse uses Dense Retrieval + BM25 Hybrid Search for state-of-the-art case law retrieval
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button onClick={() => navigate("/Chat")} 
@@ -166,7 +166,7 @@ export default function Home() {
         className="custom-class sm:text-5xl font-semibold mb-6"
       >See It In Action</GradientText>
       <p className="text-lg text-muted-foreground">
-        Experience the power of CaseBridge firsthand
+        Experience the power of Case Pulse firsthand
       </p>
     </div>
     
@@ -174,7 +174,7 @@ export default function Home() {
       videoUrl="/assests/demo.mp4"
       thumbnail="/path/to/thumbnail.jpg"
       title="Platform Walkthrough"
-      description="Watch how CaseBridge revolutionizes legal research with AI"
+      description="Watch how Case Pulse revolutionizes legal research with AI"
     />
   </div>
 </section>
@@ -319,7 +319,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-black text-center text-muted-foreground relative z-10">
-        <p>&copy; {new Date().getFullYear()} Case Bridge. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Case Pulse. All rights reserved.</p>
       </footer>
     </div>
   );

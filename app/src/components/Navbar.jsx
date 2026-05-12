@@ -46,7 +46,7 @@ export default function Navbar() {
       shadow-md
     ">
       <div className="flex items-center gap-3 pl-2">
-        <span className="text-xl text-white tracking-tight">Case Bridge</span>
+        <span className="text-xl text-white tracking-tight">Case Pulse</span>
       </div>
       <div className="flex gap-6 items-center pr-2">
         <span

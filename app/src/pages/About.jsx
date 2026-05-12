@@ -24,14 +24,14 @@ const team = [
   {
     name: "Nikhilesh Nilagiri ",
     src:"../contribtrs/ba.png",
-    role: "Frontend Engineer",
-    bio: "Owns the UI system and design consistency across the app for a cohesive experience.",
+    role: "ML Engineer",
+    bio: "Indexed legal corpora and developed semantic retrieval pipelines for case search.",
     links: { github: "#", linkedin: "#" },
   },
   {
     name: "P Hrithik Raj",
     src:"../contribtrs/bb.png",
-    role: "Data Engineer",
+    role: "Frontend Engineer & Data Engineer",
     bio: "Handles data pipelines and ensures reliable ingestion and processing of case law datasets.",
     links: { github: "#", linkedin: "#" },
   },

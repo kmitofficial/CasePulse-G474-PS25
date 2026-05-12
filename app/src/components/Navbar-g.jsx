@@ -36,7 +36,7 @@ export default function Navbar() {
     >
       {/* Brand */}
       <div className="flex items-center gap-3 pl-2">
-        <span className="text-xl text-white tracking-tight">Case Bridge</span>
+        <span className="text-xl text-white tracking-tight">Case Pulse</span>
       </div>
 
       {/* Links + Profile */}

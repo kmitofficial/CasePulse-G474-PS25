@@ -1,4 +1,4 @@
-# CaseBridge 
+# Case Pulse
 
 ## ✅ Achievements So Far
 - **Curated Indian Case Law Dataset:** Collected and organized the **Indian Case Law Evaluation Corpus (ICLEC)**, available on [Kaggle](https://www.kaggle.com/datasets/hrithikraj2537/indian-case-law-evaluation-corpus-iclec).  
@@ -9,12 +9,12 @@
 ---
 
 ## 📖 Introduction
-CaseBridge is a research-driven system designed to advance legal information retrieval and summarization. Inspired by the CLERC benchmark, CaseBridge processes large-scale case law corpora to provide accurate, explainable, and efficient retrieval of relevant passages. Beyond retrieval, the system generates concise and accessible case summaries, helping legal professionals, students, and researchers navigate complex judicial texts. By combining traditional sparse retrieval methods with dense neural representations, CaseBridge bridges the gap between raw case law data and actionable legal insights.  
+Case Pulse is a research-driven system designed to advance legal information retrieval and summarization. Inspired by the CLERC benchmark, Case Pulse processes large-scale case law corpora to provide accurate, explainable, and efficient retrieval of relevant passages. Beyond retrieval, the system generates concise and accessible case summaries, helping legal professionals, students, and researchers navigate complex judicial texts. By combining traditional sparse retrieval methods with dense neural representations, Case Pulse bridges the gap between raw case law data and actionable legal insights.  
 
 ---
 
 ## 🎯 Purpose and Users
-The goal of CaseBridge is to provide a unified framework for both case retrieval and summarization. Legal practitioners and researchers face the dual challenge of locating the most relevant precedents and synthesizing them into clear arguments. CaseBridge addresses both: it retrieves relevant passages from millions of documents and summarizes them into digestible briefs.  
+The goal of Case Pulse is to provide a unified framework for both case retrieval and summarization. Legal practitioners and researchers face the dual challenge of locating the most relevant precedents and synthesizing them into clear arguments. Case Pulse addresses both: it retrieves relevant passages from millions of documents and summarizes them into digestible briefs.  
 
 **Target Users:**  
 - Lawyers seeking case precedents  
@@ -37,14 +37,14 @@ The goal of CaseBridge is to provide a unified framework for both case retrieval
 ---
 
 ## 📚 Reference Research Paper Summary
-CaseBridge builds on the research presented in *CLERC: A Benchmark for Legal Case Retrieval and Summarization*. The CLERC benchmark introduces a large-scale dataset of over twenty-three million passages from U.S. case law and establishes evaluation protocols for retrieval and summarization. Dense retrieval using LegalBERT-CLERC achieved a recall of 68% at 1000, while BM25 achieved a recall of 48%. Summarization tasks were evaluated for the ability to produce concise briefs reflective of professional legal summaries.  
+Case Pulse builds on the research presented in *CLERC: A Benchmark for Legal Case Retrieval and Summarization*. The CLERC benchmark introduces a large-scale dataset of over twenty-three million passages from U.S. case law and establishes evaluation protocols for retrieval and summarization. Dense retrieval using LegalBERT-CLERC achieved a recall of 68% at 1000, while BM25 achieved a recall of 48%. Summarization tasks were evaluated for the ability to produce concise briefs reflective of professional legal summaries.  
 
-CaseBridge extends these findings by re-implementing retrieval pipelines, optimizing them for memory efficiency, and integrating summarization with retrieval into a practical system.  
+Case Pulse extends these findings by re-implementing retrieval pipelines, optimizing them for memory efficiency, and integrating summarization with retrieval into a practical system.  
 
 ---
 
 ## 👥 Contributors
-The CaseBridge project has been made possible through the collaborative efforts of a dedicated team, with each member contributing to retrieval implementation, evaluation, user interface design, and presentation milestones.  
+The Case Pulse project has been made possible through the collaborative efforts of a dedicated team, with each member contributing to retrieval implementation, evaluation, user interface design, and presentation milestones.  
 
 | Name              | First Milestone PPT | First Milestone Video | Second Milestone PPT | Second Milestone Video |
 |-------------------|---------------------|-----------------------|-----------------------|-------------------------|
